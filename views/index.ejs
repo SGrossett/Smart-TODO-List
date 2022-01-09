@@ -1,20 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <!-- Meta Information -->
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+    <title>Smart-TODO-List - Home Page</title>
 
-<head>
-  <title>Home Page</title>
+    <!-- External CSS -->
 
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <!-- App CSS -->
 
-  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-  <script type="text/javascript" src="/scripts/app.js"></script>
-</head>
+    <!-- External JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<body>
-  <h1>Have fun! 🥔</h1>
-</body>
+    <!-- App JS -->
+  </head>
 
+  <body>
+    <!-- Top nav bar (fixed) -->
+    <nav>
+      <div>
+        <span>APP NAME</span>
+      </div>
+    </nav>
+
+   <div>
+    <form action="" method="POST">
+      <div>
+        <button type="submit">+</button>
+      </div>
+      <textarea name="text" id=""></textarea>
+    </form>
+   </div>
+
+    <!-- Page-specific (main) content here -->
+    <main class="container">
+      <section id="movies-container">Movies</section>
+      <section id="restaurants-container">Restaurants</section>
+      <section id="books-container">Books</section>
+      <section id="products-container">Products</section>
+    </main>
+  </body>
 </html>
+
