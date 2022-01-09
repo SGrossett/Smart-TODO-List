@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS widgets CASCADE;
+DROP TABLE IF EXISTS tasks CASCADE;
+CREATE TABLE tasks (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER REFERENCES users(id),
+  description VARCHAR(255),
+  date_created TIMESTAMP NOT NULL,
+  date_finished TIMESTAMP,
+  category VARCHAR(255)
+);
