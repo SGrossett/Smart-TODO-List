@@ -52,12 +52,33 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
+// for logout
+app.post('/', (req, res) => {
+  res.render('index');
+});
+
+app.get('/complete', (req, res) => {
+  res.render('complete');
+});
+
+app.get('/incomplete', (req, res) => {
+  res.render('incomplete');
+});
+
 app.get('/login', (req, res) => {
   res.render('login');
 });
 
+app.post('/login', (req, res) => {
+  res.redirect('/');
+});
+
 app.get('/register', (req, res) => {
   res.render('register');
+});
+
+app.post('/register', (req, res) => {
+  res.redirect('/');
 });
 
 app.listen(PORT, () => {
