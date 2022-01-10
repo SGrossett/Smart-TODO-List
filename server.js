@@ -1,5 +1,6 @@
 // load .env data into process.env
 require('dotenv').config();
+const database = require('./routes/database');
 
 // Web server config
 const PORT = process.env.PORT || 8080;
@@ -59,7 +60,7 @@ app.post('/logout', (req, res) => {
 
 app.get('/tasks', (req, res) => {
   res.render('complete');
-})
+});
 
 app.get('/login', (req, res) => {
   res.render('login');
@@ -75,6 +76,20 @@ app.get('/register', (req, res) => {
 
 app.post('/register', (req, res) => {
   res.redirect('/');
+});
+
+// db tests
+app.get('/get-all-tasks', (req, res) => {
+  database.getAllTasks().then((tasks) => {
+    console.log(tasks);
+    res.send(tasks);
+  });
+});
+app.get('/get-tasks-from-user-id/:id', (req, res) => {
+  database.getTasksFromUserId(req.params.id).then((tasks) => {
+    console.log(tasks);
+    res.send(tasks);
+  });
 });
 
 app.listen(PORT, () => {
