@@ -2,6 +2,10 @@
 require('dotenv').config();
 const database = require('./routes/database');
 
+// Temporary Dummy Login
+let user_id = 1;
+let { categories } = require('./seeds/constants');
+
 // Web server config
 const PORT = process.env.PORT || 8080;
 const sassMiddleware = require('./lib/sass-middleware');
@@ -50,7 +54,14 @@ app.use('/api/widgets', widgetsRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  res.render('index');
+  database.getTasksFromUserId(user_id).then((tasks) => {
+    // for (let category in categories) {
+    //   $(`.${category}`).append(`
+    //   `)
+    // }
+    res.send(tasks);
+  });
+  // res.render('index');
 });
 
 // for logout

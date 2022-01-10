@@ -1,2 +1,3 @@
 // Categories
-const categories = {movie: 'movie', books: 'book', restaurant: 'restaurant', product: 'product'};
+const categories = [ 'movie', 'book', 'restaurant', 'product' ];
+module.exports = { categories };
