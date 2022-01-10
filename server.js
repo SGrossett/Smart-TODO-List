@@ -53,17 +53,13 @@ app.get('/', (req, res) => {
 });
 
 // for logout
-app.post('/', (req, res) => {
+app.post('/logout', (req, res) => {
   res.render('index');
 });
 
-app.get('/complete', (req, res) => {
+app.get('/tasks', (req, res) => {
   res.render('complete');
-});
-
-app.get('/incomplete', (req, res) => {
-  res.render('incomplete');
-});
+})
 
 app.get('/login', (req, res) => {
   res.render('login');
