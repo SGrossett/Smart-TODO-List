@@ -12,6 +12,7 @@ const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -37,6 +38,7 @@ app.use(
 );
 
 app.use(express.static('public'));
+app.use(bodyParser.json());
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -70,7 +72,7 @@ app.post('/logout', (req, res) => {
 });
 
 app.get('/tasks', (req, res) => {
-  res.render('complete');
+  res.render('index');
 });
 
 app.get('/login', (req, res) => {
@@ -88,6 +90,28 @@ app.get('/register', (req, res) => {
 app.post('/register', (req, res) => {
   res.redirect('/');
 });
+
+app.post('/tasks', (req, res) => {
+  const body = req.body;
+
+  return db
+    .query(`
+    INSERT INTO tasks (
+      description,
+      date_created
+    ) VALUES (
+      $1,
+      NOW()
+    )
+  `, [body.text])
+    .then((result) => {
+      console.log('Task added','result.rows[0]:', result.rows[0])
+      res.send('Task added')
+      return result.rows[0];
+    })
+    .catch((err) => console.log('Error:', err.message) );
+})
+
 
 // db tests
 app.get('/get-all-tasks', (req, res) => {
