@@ -23,13 +23,13 @@ const getAllTasks = function() {
 
 const getTasksFromUserId = function(user_id) {
   return pool
-  .query(
-    `
+    .query(
+      `
     SELECT * FROM tasks
     JOIN users ON tasks.user_id = users.id
     WHERE $1 = tasks.user_id
     `,
-    [ user_id ]
+      [ user_id ]
     )
     .then((tasks) => {
       if (tasks.rows) {
@@ -39,6 +39,36 @@ const getTasksFromUserId = function(user_id) {
       }
     })
     .catch((err) => console.log(err.message));
-  };
+};
 
-  module.exports = { getAllTasks, getTasksFromUserId };
+const getIdFromEmail = function(email) {
+  return pool
+    .query(
+      `
+  SELECT id FROM users
+  WHERE email = $1
+  ;
+  `,
+      [ email ]
+    )
+    .then((result) => {
+      return result.rows[0].id;
+    });
+};
+
+const addUserWithEmail = function(email) {
+  return pool
+    .query(
+      `
+      INSERT INTO users (email)
+      VALUES ($1)
+      RETURNING *;
+    `,
+      [ email ]
+    )
+    .then((email) => {
+      return email.rows[0].id;
+    });
+};
+
+module.exports = { getAllTasks, getTasksFromUserId, getIdFromEmail, addUserWithEmail };

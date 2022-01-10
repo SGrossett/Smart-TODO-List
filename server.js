@@ -92,20 +92,24 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-  let { email } = req.body; // FOR ACTUAL login form
+  let { email } = req.body;
 
-  console.log(req.body.email);
-  req.session.user_id = 2; // test different ids
-  console.log('cookie set!');
-  res.redirect('/');
+  database.getIdFromEmail(email).then((user_id) => {
+    req.session.user_id = user_id;
+    res.redirect('/');
+  });
 });
 
 app.get('/register', (req, res) => {
-  res.render('register');
+  res.render('registration');
 });
 
 app.post('/register', (req, res) => {
-  res.redirect('/');
+  let { email } = req.body;
+  database.addUserWithEmail(email).then((user_id) => {
+    req.session.user_id = user_id;
+    res.redirect('/');
+  });
 });
 
 // db tests
