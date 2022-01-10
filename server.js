@@ -116,8 +116,7 @@ app.post('/register', (req, res) => {
 app.post('/tasks', (req, res) => {
   const body = req.body;
 
-  return db
-    .query(`
+  db.query(`
     INSERT INTO tasks (
       description,
       date_created
@@ -126,12 +125,8 @@ app.post('/tasks', (req, res) => {
       NOW()
     )
   `, [body.text])
-    .then((result) => {
-      console.log('Task added','result.rows[0]:', result.rows[0])
-      res.send('Task added')
-      return result.rows[0];
-    })
-    .catch((err) => console.log('Error:', err.message) );
+  .then((result) => {res.send()})
+  .catch((err) => console.log('Error:', err.message) );
 })
 
 
