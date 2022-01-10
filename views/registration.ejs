@@ -13,13 +13,39 @@
 
 
     <style>
-      body { background-color: #7788A0; }
-      .card-container { background: #f2f2f2; margin: 200px auto;  max-width: 500px; padding: 40px; box-shadow: 10px 12px 4px rgba(0, 0, 0, 0.3); }
-      #profile-img { display: block; margin: 20px auto 40px; border-radius: 15%; height: 150px; width: 150px; }
-      .registration .form-control { margin: 12px auto; }
-      h2 { font-size: 3rem; }
-      .btn { width: 100%; cursor: pointer;  margin: 0px auto 35px; }
-      h2:before, h2:after { content: ""; height: 3px; width: 30%; background: #d4d4d4; position: absolute; top: 13%; z-index: 2; }
+      .card-container {
+        background: #f2f2f2;
+        padding: 40px;
+        height: 100vh;
+      }
+      #profile-img {
+        display: block;
+        margin: 30px auto 40px;
+        border-radius: 15%;
+        height: 150px;
+        width: 150px;
+      }
+      .registration .form-control {
+        margin: 12px auto;
+      }
+      h2 {
+        font-size: 3rem;
+        margin-top: 0.25em;
+      }
+      .btn {
+        width: 100%;
+        cursor: pointer;
+        margin: 0px auto 35px;
+      }
+      h2:before, h2:after {
+        content: "";
+        height: 3px;
+        width: 27%;
+        background: #d4d4d4;
+        position: absolute;
+        top: 13%;
+        z-index: 2;
+      }
       h2:before { left: 0; }
       h2:after { right: 0; }
     </style>
@@ -30,7 +56,7 @@
   <body>
 
     <div class="card card-container">
-      <h2 class="text-center">Register</h2>
+      <h2 class="text-center">App Name</h2>
         <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="blank-profile-pic" id="profile-img"/>
 
         <form action="/register" method="POST" class="registration">
