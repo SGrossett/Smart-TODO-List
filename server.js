@@ -1,5 +1,10 @@
 // load .env data into process.env
 require('dotenv').config();
+const database = require('./routes/database');
+
+// Temporary Dummy Login
+let user_id = 1;
+let { categories } = require('./seeds/constants');
 
 // Web server config
 const PORT = process.env.PORT || 8080;
@@ -49,7 +54,14 @@ app.use('/api/widgets', widgetsRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  res.render('index');
+  database.getTasksFromUserId(user_id).then((tasks) => {
+    // for (let category in categories) {
+    //   $(`.${category}`).append(`
+    //   `)
+    // }
+    res.send(tasks);
+  });
+  // res.render('index');
 });
 
 // for logout
@@ -59,7 +71,7 @@ app.post('/logout', (req, res) => {
 
 app.get('/tasks', (req, res) => {
   res.render('complete');
-})
+});
 
 app.get('/login', (req, res) => {
   res.render('login');
@@ -75,6 +87,20 @@ app.get('/register', (req, res) => {
 
 app.post('/register', (req, res) => {
   res.redirect('/');
+});
+
+// db tests
+app.get('/get-all-tasks', (req, res) => {
+  database.getAllTasks().then((tasks) => {
+    console.log(tasks);
+    res.send(tasks);
+  });
+});
+app.get('/get-tasks-from-user-id/:id', (req, res) => {
+  database.getTasksFromUserId(req.params.id).then((tasks) => {
+    console.log(tasks);
+    res.send(tasks);
+  });
 });
 
 app.listen(PORT, () => {
