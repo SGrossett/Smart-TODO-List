@@ -24,17 +24,19 @@
     </nav>
 
    <div>
-    <form action="" method="POST">
+    <form action="/tasks" method="POST">
       <div>
         <button type="submit">+</button>
       </div>
-      <textarea name="text" id=""></textarea>
+      <input type="text" name="text" id="task-text"></input>
     </form>
    </div>
 
     <!-- Page-specific (main) content here -->
     <main class="container">
-      <section id="movies-container">Movies</section>
+      <section id="movies-container">Movies
+        <p class="movieTasks"></p>
+      </section>
       <section id="restaurants-container">Restaurants</section>
       <section id="books-container">Books</section>
       <section id="products-container">Products</section>
