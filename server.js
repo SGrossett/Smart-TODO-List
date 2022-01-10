@@ -94,6 +94,7 @@ app.get('/login', (req, res) => {
 app.post('/login', (req, res) => {
   let { email } = req.body; // FOR ACTUAL login form
 
+  console.log(req.body.email);
   req.session.user_id = 2; // test different ids
   console.log('cookie set!');
   res.redirect('/');
