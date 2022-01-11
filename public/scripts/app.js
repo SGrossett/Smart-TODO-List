@@ -55,7 +55,8 @@ $(document).ready(function() {
   };
 
   $('.accordion').accordion({
-    collapsible: true
+    collapsible: true,
+    active: false
   });
   $('.accordion').accordion('refresh');
 });

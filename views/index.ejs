@@ -19,38 +19,38 @@
 
   <body>
     <!-- Top nav bar (fixed) -->
-    <nav>
+    <!-- <nav>
       <div class="header">
         <span>APP NAME</span>
       </div>
-    </nav>
+    </nav> -->
 
    <div>
     <form id="form1" action="/tasks" method="POST">
       <input type="text" name="text" id="task-text"></input>
-      <button type="submit">+</button>
+      <button type="submit" id="form-submit">+</button>
     </form>
    </div>
 
     <!-- Page-specific (main) content here -->
     <main class="container" >
       <section class="movies-container accordion">
-        <div class="movies-header">Movies</div>
+        <div class="movies-header headerBar">Movies</div>
         <div class="movieTasks listContents"></div>
       </section>
 
       <section class="restaurants-container accordion">
-        <div class="restaurants-header">Restaurants</div>
+        <div class="restaurants-header headerBar">Restaurants</div>
         <div class="restaurantTasks listContents"></div>
       </section>
 
       <section class="books-container accordion">
-        <div class="books-header">Books</div>
+        <div class="books-header headerBar">Books</div>
         <div class="bookTasks listContents"></div>
       </section>
 
       <section class="products-container accordion">
-        <div class="products-header">Products</div>
+        <div class="products-header headerBar">Products</div>
         <div class="productTasks listContents"></div>
       </section>
     </main>
