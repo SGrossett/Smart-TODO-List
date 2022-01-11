@@ -24,7 +24,7 @@ $(document).ready(function() {
 
   const fetchTasks = function(){
     $.ajax({
-      url: `/get-all-tasks`,
+      url: `/user-tasks`,
       method: 'GET',
     }).done(listItems => {
       $('.movieTasks').empty()
