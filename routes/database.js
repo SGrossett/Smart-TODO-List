@@ -71,4 +71,18 @@ const addUserWithEmail = function(email) {
     });
 };
 
-module.exports = { getAllTasks, getTasksFromUserId, getIdFromEmail, addUserWithEmail };
+const insertIntoTasks = function (text) {
+  return pool.query(`
+    INSERT INTO tasks (
+      description,
+      date_created
+    ) VALUES (
+      $1,
+      NOW()
+    )
+  `, [text])
+  .then((result) => result)
+  .catch((err) => console.log('Error:', err.message) );
+}
+
+module.exports = { getAllTasks, getTasksFromUserId, getIdFromEmail, addUserWithEmail, insertIntoTasks };
