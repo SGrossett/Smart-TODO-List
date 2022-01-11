@@ -38,6 +38,21 @@ nav {
   overflow-y: scroll;
 }
 
+.bookTasks {
+  height: 100px;
+  overflow-y: scroll;
+}
+
+.restaurantTasks {
+  height: 100px;
+  overflow-y: scroll;
+}
+
+.productTasks {
+  height: 100px;
+  overflow-y: scroll;
+}
+
 .restaurants-container {
   background-color: darkgrey;
 }
