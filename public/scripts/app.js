@@ -29,7 +29,7 @@ $(document).ready(function() {
     }).done(listItems => {
       $('.movieTasks').empty()
       listItems.map((item) => {
-        $('.movieTasks').append(createMarkup(item));
+        $('.movieTasks').prepend(createMarkup(item));
         console.log(item)
       });
     })
