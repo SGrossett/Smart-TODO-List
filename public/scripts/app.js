@@ -37,7 +37,6 @@ $(document).ready(function() {
         $('.movieTasks').append(createMarkup(item));
         console.log(item)
       });
-      // console.log('list items');
     })
   }
 
@@ -47,12 +46,3 @@ $(document).ready(function() {
   });
   $('.accordion').accordion("refresh")
 });
-// JQuery - accordion list items
-
-
-// delete button
-// $(".deleteButton").click(function() {
-//   $(".movieTasks").eq(1).remove();
-// });
-// console.log(`delete button being pushed`);
-// add filter here
