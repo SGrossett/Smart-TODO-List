@@ -6,11 +6,13 @@
     <title>Smart-TODO-List - Home Page</title>
 
     <!-- External CSS -->
-
+    <link rel="stylesheet" href="./styles/main.css" type="text/css"/>
     <!-- App CSS -->
 
     <!-- External JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 
     <!-- App JS -->
   </head>
@@ -18,28 +20,39 @@
   <body>
     <!-- Top nav bar (fixed) -->
     <nav>
-      <div>
+      <div class="header">
         <span>APP NAME</span>
       </div>
     </nav>
 
    <div>
     <form id="form1" action="/tasks" method="POST">
-      <div>
-        <button type="submit">+</button>
-      </div>
       <input type="text" name="text" id="task-text"></input>
+      <button type="submit">+</button>
     </form>
    </div>
 
     <!-- Page-specific (main) content here -->
-    <main class="container">
-      <section id="movies-container">Movies
-        <p class="movieTasks"></p>
+    <main class="container" >
+      <section class="movies-container accordion">
+        <div class="movies-header">Movies</div>
+        <div class="movieTasks"></div>
       </section>
-      <section id="restaurants-container">Restaurants</section>
-      <section id="books-container">Books</section>
-      <section id="products-container">Products</section>
+
+      <section class="restaurants-container accordion">
+        <div class="restaurants-header">Restaurants</div>
+        <div class="restaurantTasks"></div>
+      </section>
+
+      <section class="books-container accordion">
+        <div class="books-header">Books</div>
+        <div class="bookTasks"></div>
+      </section>
+
+      <section class="products-container accordion">
+        <div class="products-header">Products</div>
+        <div class="productTasks"></div>
+      </section>
     </main>
   </body>
   <script src="./scripts/app.js"></script>

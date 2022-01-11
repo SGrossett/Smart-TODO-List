@@ -8,7 +8,7 @@ const pool = new Pool({
   port: process.env.DB_PORT
 });
 
-const getAllTasks = function() {
+const getAllTasks = function () {
   return pool
     .query(`SELECT * FROM tasks`)
     .then((tasks) => {
@@ -20,6 +20,7 @@ const getAllTasks = function() {
     })
     .catch((err) => console.log(err.message));
 };
+exports.getAllTasks = getAllTasks
 
 const getTasksFromUserId = function(user_id) {
   return pool
@@ -40,6 +41,7 @@ const getTasksFromUserId = function(user_id) {
     })
     .catch((err) => console.log(err.message));
 };
+exports.getTasksFromUserId = getTasksFromUserId
 
 const getIdFromEmail = function(email) {
   return pool
@@ -55,6 +57,7 @@ const getIdFromEmail = function(email) {
       return result.rows[0].id;
     });
 };
+exports.getIdFromEmail = getIdFromEmail
 
 const addUserWithEmail = function(email) {
   return pool
@@ -70,8 +73,9 @@ const addUserWithEmail = function(email) {
       return email.rows[0].id;
     });
 };
+exports.addUserWithEmail = addUserWithEmail
 
-const insertIntoTasks = function (text) {
+const insertIntoTasks = function (text, user_id) {
   const task = text;
   console.log('task:', task)
   const allKeyWords = [
@@ -115,15 +119,15 @@ const insertIntoTasks = function (text) {
     INSERT INTO tasks (
       description,
       category,
-      date_created
+      date_created, user_id
     ) VALUES (
       $1,
       $2,
-      NOW()
+      NOW(),
+      $3
     )
-  `, [text, category])
+  `, [text, category, user_id])
   .then((result) => result)
   .catch((err) => console.log('Error:', err.message) );
 }
-
-module.exports = { getAllTasks, getTasksFromUserId, getIdFromEmail, addUserWithEmail, insertIntoTasks };
+exports.insertIntoTasks = insertIntoTasks

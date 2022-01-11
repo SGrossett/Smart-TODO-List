@@ -1,17 +1,90 @@
 body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  margin-left: 10%;
+  margin-right: 10%;
 
-  background: rgb(163, 208, 219);
-  background: linear-gradient(
-    227deg,
-    rgba(163, 208, 219, 1) 0%,
-    rgba(163, 176, 219, 1) 20%,
-    rgba(163, 173, 219, 1) 34%,
-    rgba(163, 219, 208, 1) 59%,
-    rgba(163, 208, 219, 1) 74%,
-    rgba(163, 208, 219, 1) 100%
-  );
 }
+nav {
+  background-color: bisque;
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+}
+#form1 {
+  background-color: cadetblue;
+  display: flex;
+  justify-content: space-between;
+}
+// categories
+.container {
+  border: 2px solid black;
+  // background-color: chartreuse;
+}
+// DELETE - for testing only
+.categoryHeader {
+  background-color: cornsilk;
+}
+.movies-container {
+  background-color: crimson;
+  height: fit-content;
+}
+.movieTasks {
+  background-color: blue;
+  height: 100px;
+  overflow-y: scroll;
+}
+.bookTasks{
+  height: 100px;
+  overflow-y: scroll;
+}
+.restaurantTasks{
+  height: 100px;
+  overflow-y: scroll;
+}
+.productTasks{
+  height: 100px;
+  overflow-y: scroll;
+}
+.restaurants-container{
+  background-color: darkgrey;
+}
+.books-container{
+  background-color: darkgreen;
+}
+.products-container {
+  background-color: darkseagreen;
+}
+// lists
+.listItem {
+  background-color: coral;
+}
+
+// accordion
+
+// // category headings
+// #accordion {
+//   background-color: #eee;
+//   color: #444;
+//   cursor: pointer;
+//   // padding: 18px;
+//   // width: 100%;
+//   text-align: left;
+//   border: none;
+//   outline: none;
+//   transition: 0.4s;
+// }
+
+// // changes colour on hover
+// .active, #accordion:hover {
+//   background-color: #ccc;
+// }
+
+// // accordion panel
+// .panel {
+//   // padding: 0 18px;
+//   background-color: white;
+//   display: none;
+//   overflow: hidden;
+// }

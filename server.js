@@ -48,24 +48,11 @@ app.use(bodyParser.json());
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  let user_id = req.session.user_id;
-  console.log(user_id);
-  database.getTasksFromUserId(user_id).then((tasks) => {
-    // for (let category in categories) {
-    //   $(`.${category}`).append(`
-    //   `)
-    // }
-    res.send(tasks);
-  });
-  // res.render('index');
+  res.render('index');
 });
 
 // for logout
 app.post('/logout', (req, res) => {
-  res.render('index');
-});
-
-app.get('/tasks', (req, res) => {
   res.render('index');
 });
 
@@ -94,21 +81,33 @@ app.post('/register', (req, res) => {
   });
 });
 
-app.post('/tasks', (req, res) => {
-  const body = req.body;
-
-  database.insertIntoTasks(body.text).then((result) => {
-    res.send();
-  });
-});
-
-// db tests
-app.get('/get-all-tasks', (req, res) => {
-  database.getAllTasks().then((tasks) => {
-    console.log(tasks);
+// --- API ROUTES -------------------------------------------------------------
+app.get('/user-tasks', (req, res) => {
+  let user_id = req.session.user_id;
+  database.getTasksFromUserId(user_id).then((tasks) => {
     res.send(tasks);
   });
 });
+
+app.post('/user-tasks', (req, res) => {
+  let user_id = req.session.user_id;
+  const body = req.body;
+
+  database.insertIntoTasks(body.text, user_id).then((result) => {
+    console.log(result);
+  });
+});
+
+// todo rename to all-tasks
+app.get('/all-tasks', (req, res) => {
+  database.getAllTasks().then((tasks) => {
+    console.log(tasks);
+    // res.send(tasks);
+    res.json(tasks);
+  });
+});
+
+// --- DEV API ROUTES (TEMPORARY - REMOVE ON PROJECT COMPLETION ) -------------
 app.get('/get-tasks-from-user-id/:id', (req, res) => {
   database.getTasksFromUserId(req.params.id).then((tasks) => {
     console.log(tasks);
