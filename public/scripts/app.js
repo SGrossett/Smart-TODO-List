@@ -31,7 +31,8 @@ $(document).ready(function() {
       url: `/user-tasks`,
       method: 'GET'
     }).done((listItems) => {
-      $('.movieTasks').empty();
+      $('.listContents').empty();
+
       listItems.map((item) => {
         // add item to movies
         if (item.category === 'movie') {
