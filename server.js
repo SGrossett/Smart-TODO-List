@@ -106,7 +106,8 @@ app.post('/tasks', (req, res) => {
 app.get('/get-all-tasks', (req, res) => {
   database.getAllTasks().then((tasks) => {
     console.log(tasks);
-    res.send(tasks);
+    // res.send(tasks);
+    res.json(tasks);
   });
 });
 app.get('/get-tasks-from-user-id/:id', (req, res) => {

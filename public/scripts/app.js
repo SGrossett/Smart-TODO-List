@@ -4,7 +4,7 @@ $(document).ready(function() {
 
   $('#form1').submit(function(event) {
     const taskText = $('#task-text').val();
-    const markup = `<p class="listItem">${taskText}<button class="deleteButton">X</button></p>`;
+    const markup = `<div><span class="listItem">${taskText}</span></div>`;
     event.preventDefault();
     console.log('submitting form')
 
@@ -14,18 +14,40 @@ $(document).ready(function() {
       data: $(this).serialize()
     }).done(listItems => {
       // add filter here
-      $('.movieTasks').append(markup);
+      // $('.movieTasks').append(markup);
+      // const content = $('.movieTasks').html();
+      // console.log(content);
+      // $('.movieTasks').append(markup);
       console.log('appending the element');
+      fetchTasks()
     })
   })
-});
-// JQuery - accordion list items
-$( function() {
-  $( "#accordion" ).accordion({
+
+  const createMarkup = function(data){
+    return `<div><span class="listItem">${data.description}</span></div>`
+  };
+
+  const fetchTasks = function(){
+    $.ajax({
+      url: `/get-all-tasks`,
+      method: 'GET',
+    }).done(listItems => {
+      $('.movieTasks').empty()
+      listItems.map((item) => {
+        $('.movieTasks').append(createMarkup(item));
+        console.log(item)
+      });
+      // console.log('list items');
+    })
+  }
+
+
+  $( ".accordion" ).accordion({
     collapsible: true
   });
-  $('#accordion').accordion("refresh")
+  $('.accordion').accordion("refresh")
 });
+// JQuery - accordion list items
 
 
 // delete button

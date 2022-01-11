@@ -1,5 +1,4 @@
 body {
-  background-color: aliceblue;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,10 +8,14 @@ body {
 }
 nav {
   background-color: bisque;
+  display: flex;
+  justify-content: center;
   margin-top: 10%;
 }
 #form1 {
   background-color: cadetblue;
+  display: flex;
+  justify-content: space-between;
 }
 // categories
 .container {
@@ -25,6 +28,12 @@ nav {
 }
 .movies-container {
   background-color: crimson;
+  height: fit-content;
+}
+.movieTasks {
+  background-color: blue;
+  height: 100px;
+  overflow-y: scroll;
 }
 .restaurants-container{
   background-color: darkgrey;
