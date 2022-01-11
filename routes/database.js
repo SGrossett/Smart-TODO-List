@@ -75,7 +75,7 @@ const addUserWithEmail = function(email) {
 };
 exports.addUserWithEmail = addUserWithEmail
 
-const insertIntoTasks = function (text) {
+const insertIntoTasks = function (text, user_id) {
   const task = text;
   console.log('task:', task)
   const allKeyWords = [
@@ -119,13 +119,14 @@ const insertIntoTasks = function (text) {
     INSERT INTO tasks (
       description,
       category,
-      date_created
+      date_created, user_id
     ) VALUES (
       $1,
       $2,
-      NOW()
+      NOW(),
+      $3
     )
-  `, [text, category])
+  `, [text, category, user_id])
   .then((result) => result)
   .catch((err) => console.log('Error:', err.message) );
 }
