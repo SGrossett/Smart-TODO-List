@@ -92,9 +92,11 @@ app.get('/user-tasks', (req, res) => {
 app.post('/user-tasks', (req, res) => {
   let user_id = req.session.user_id;
   const body = req.body;
+  console.log('adding user tasks');
 
   database.insertIntoTasks(body.text, user_id).then((result) => {
-    console.log(result);
+    // console.log(result);
+    res.send()
   });
 });
 

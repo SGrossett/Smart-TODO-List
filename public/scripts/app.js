@@ -6,28 +6,32 @@ $(document).ready(function() {
     const taskText = $('#task-text').val();
     const markup = `<div><span class="listItem">${taskText}</span></div>`;
     event.preventDefault();
-    console.log('submitting form')
+    console.log('submitting form');
 
-    $.ajax({
-      url: `/tasks`,
-      method: 'POST',
-      data: $(this).serialize()
-    }).done(listItems => {
-      console.log('appending the element');
-      fetchTasks()
-    })
-  })
-
-  const createMarkup = function(data){
-    return `<div><span class="listItem">${data.description}</span></div>`
-  };
-
-  const fetchTasks = function(){
     $.ajax({
       url: `/user-tasks`,
-      method: 'GET',
-    }).done(listItems => {
-      $('.movieTasks').empty()
+      method: 'POST',
+      data: $(this).serialize()
+    })
+      .done((listItems) => {
+        console.log('TASK ADDED!');
+        fetchTasks();
+      })
+      .fail((err) => {
+        console.log('ERROR', err);
+      });
+  });
+
+  const createMarkup = function(data) {
+    return `<div><span class="listItem">${data.description}</span></div>`;
+  };
+
+  const fetchTasks = function() {
+    $.ajax({
+      url: `/user-tasks`,
+      method: 'GET'
+    }).done((listItems) => {
+      $('.movieTasks').empty();
       listItems.map((item) => {
         // add item to movies
         if (item.category === 'movie') {
@@ -46,12 +50,11 @@ $(document).ready(function() {
           $('.productTasks').prepend(createMarkup(item));
         }
       });
-    })
-  }
+    });
+  };
 
-
-  $( ".accordion" ).accordion({
+  $('.accordion').accordion({
     collapsible: true
   });
-  $('.accordion').accordion("refresh")
+  $('.accordion').accordion('refresh');
 });
