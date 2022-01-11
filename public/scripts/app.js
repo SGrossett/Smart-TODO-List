@@ -13,11 +13,6 @@ $(document).ready(function() {
       method: 'POST',
       data: $(this).serialize()
     }).done(listItems => {
-      // add filter here
-      // $('.movieTasks').append(markup);
-      // const content = $('.movieTasks').html();
-      // console.log(content);
-      // $('.movieTasks').append(markup);
       console.log('appending the element');
       fetchTasks()
     })
