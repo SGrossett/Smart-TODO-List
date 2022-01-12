@@ -1,3 +1,5 @@
+const axios = require('axios').default;
+
 // load .env data into process.env
 const fake_data = require('./routes/fakedata');
 require('dotenv').config();
@@ -13,9 +15,11 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 
-// Load the logger first so all (static) HTTP requests are logged to STDOUT
-// 'dev' = Concise output colored by response status for development use.
-//         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
+// PG database client/connection setup
+const { Pool } = require('pg');
+const dbParams = require('./lib/db.js');
+const db = new Pool(dbParams);
+db.connect();
 
 // MIDDLEWARE
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -44,15 +48,24 @@ app.use(
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
+const usersRoutes = require('./routes/users');
+const tasksRoutes = require('./routes/tasks');
+app.use('/api/users', usersRoutes(db));
+app.use('/api/tasks', tasksRoutes(db));
+
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  const tasks = fake_data;
-  
-  res.render('index', { tasks });
-  // res.send(fake_data);
+  const user_id = req.session.user_id;
+  axios
+    .get(`http://localhost:8080/api/tasks/task-from-user/${user_id}`)
+    .then((response) => {
+      const tasks = response.data.tasks;
+      res.render('index', { tasks });
+    })
+    .catch((err) => console.log(err.message));
 });
 
 // for logout
