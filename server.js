@@ -50,7 +50,7 @@ app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
   const tasks = fake_data;
-  
+
   res.render('index', { tasks });
   // res.send(fake_data);
 });
@@ -119,11 +119,20 @@ app.get('/completed', (req, res) => {
   database.getFinishedTasks()
   .then((task) => {
     console.log(task.rows);
-    res.render('complete', { tasks: task.rows });
+    res.render('complete', {tasks: task.rows});
+    // res.json(task.rows);
   });
 
-  //res.json(task);
 });
+
+// app.get('/complete', (req, res) => {
+//   database.getFinishedTasks()
+//   .then((task) => {
+//     console.log(task.rows);
+//     res.json(task.rows);
+//   });
+
+// });
 
 // --- DEV API ROUTES (TEMPORARY - REMOVE ON PROJECT COMPLETION ) -------------
 app.get('/get-tasks-from-user-id/:id', (req, res) => {
