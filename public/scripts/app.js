@@ -1,6 +1,7 @@
 // JQuery - add items to list
 $(document).ready(function() {
   console.log('jquery loaded');
+  let user_id;
 
   $('#form1').submit(function(event) {
     event.preventDefault();
@@ -21,15 +22,34 @@ $(document).ready(function() {
   });
 
   const createMarkup = function(data) {
-    return `<div><span class="listItem"><button type="submit" id="list-delete">X</button>${data.description}</span></div>`;
+    return `<div><span class="listItem"><input type="checkbox" id="list-delete"></input>${data.description}</span></div>`;
   };
 
   const fetchTasks = function() {
     $.ajax({
-      url: `/user-tasks`,
+      url: `/api/tasks/by_user_id/${user_id}`,
       method: 'GET'
     }).done((listItems) => {
       $('.listContents').empty();
+
+      listItems.map((item) => {
+        // add item to movies
+        if (item.category === 'movie') {
+          $('.movieTasks').prepend(createMarkup(item));
+        }
+        // add item to restaurants
+        if (item.category === 'restaurant') {
+          $('.restaurantTasks').prepend(createMarkup(item));
+        }
+        // add item to books
+        if (item.category === 'book') {
+          $('.bookTasks').prepend(createMarkup(item));
+        }
+        // add item to products
+        if (item.category === 'product') {
+          $('.productTasks').prepend(createMarkup(item));
+        }
+      });
     });
   };
 
@@ -38,14 +58,19 @@ $(document).ready(function() {
     active: false
   });
   $('.accordion').accordion('refresh');
+
+  $.get('/cookie_user_id', (res) => {
+    user_id = res;
+    fetchTasks();
+  });
 });
 
 // used in _header partial
 function navbarToggle() {
-  var x = document.getElementById("menu-links");
-  if (x.style.display === "block") {
-    x.style.display = "none";
+  var x = document.getElementById('menu-links');
+  if (x.style.display === 'block') {
+    x.style.display = 'none';
   } else {
-    x.style.display = "block";
+    x.style.display = 'block';
   }
 }

@@ -2,14 +2,57 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = (db) => {
-  router.get('/all-tasks', (req, res) => {
+  router.get('/', (req, res) => {
     let query = `SELECT * FROM tasks`;
     console.log(query);
     db
       .query(query)
       .then((data) => {
         const tasks = data.rows;
-        res.json({ tasks });
+        res.json(tasks);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  router.get('/by_user_id/:id', (req, res) => {
+    const user_id = req.params.id;
+    let query = `SELECT * FROM tasks WHERE user_id = $1`;
+    console.log(query);
+    db
+      .query(query, [ user_id ])
+      .then((data) => {
+        const tasks = data.rows;
+        res.json(tasks);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  router.get('/complete', (req, res) => {
+    let query = `SELECT * FROM tasks WHERE date_finished IS NOT NULL`;
+    console.log(query);
+    db
+      .query(query)
+      .then((data) => {
+        const tasks = data.rows;
+        res.json(tasks);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  router.get('/incomplete', (req, res) => {
+    let query = `SELECT * FROM tasks WHERE date_finished IS NULL`;
+    console.log(query);
+    db
+      .query(query)
+      .then((data) => {
+        const tasks = data.rows;
+        res.json(tasks);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });

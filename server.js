@@ -60,14 +60,12 @@ app.use('/api/tasks', tasksRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
+  res.render('index');
+});
+
+app.get('/cookie_user_id', (req, res) => {
   const user_id = req.session.user_id;
-  axios
-    .get(`http://localhost:8080/api/tasks/task-from-user/${user_id}`)
-    .then((response) => {
-      const tasks = response.data.tasks;
-      res.render('index', { tasks });
-    })
-    .catch((err) => console.log(err.message));
+  res.json(user_id);
 });
 /* ---------Moved to logins.js--------------- */
 // comment out
@@ -104,14 +102,6 @@ app.post('/register', (req, res) => {
 
 
 // --- API ROUTES -------------------------------------------------------------
-/* -------------Moved to tasks.js------------ */
-// comment out
-app.get('/user-tasks', (req, res) => {
-  let user_id = req.session.user_id;
-  database.getTasksFromUserId(user_id).then((tasks) => {
-    res.send(tasks);
-  });
-});
 
 app.post('/user-tasks', (req, res) => {
   let user_id = req.session.user_id;
@@ -121,25 +111,6 @@ app.post('/user-tasks', (req, res) => {
   database.insertIntoTasks(body.text, user_id).then((result) => {
     // console.log(result);
     res.send();
-  });
-});
-
-// todo rename to all-tasks
-app.get('/all-tasks', (req, res) => {
-  database.getAllTasks().then((tasks) => {
-    console.log(tasks);
-    // res.send(tasks);
-    res.json(tasks);
-  });
-});
-/* ------------------------------------------ */
-
-
-// --- DEV API ROUTES (TEMPORARY - REMOVE ON PROJECT COMPLETION ) -------------
-app.get('/get-tasks-from-user-id/:id', (req, res) => {
-  database.getTasksFromUserId(req.params.id).then((tasks) => {
-    console.log(tasks);
-    res.send(tasks);
   });
 });
 
