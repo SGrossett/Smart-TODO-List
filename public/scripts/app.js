@@ -1,6 +1,7 @@
 // JQuery - add items to list
 $(document).ready(function() {
   console.log('jquery loaded');
+  let user_id;
 
   $('#form1').submit(function(event) {
     event.preventDefault();
@@ -26,7 +27,7 @@ $(document).ready(function() {
 
   const fetchTasks = function() {
     $.ajax({
-      url: `/api/tasks`,
+      url: `/api/tasks/by_user_id/${user_id}`,
       method: 'GET'
     }).done((listItems) => {
       $('.listContents').empty();
@@ -58,7 +59,10 @@ $(document).ready(function() {
   });
   $('.accordion').accordion('refresh');
 
-  fetchTasks();
+  $.get('/cookie_user_id', (res) => {
+    user_id = res;
+    fetchTasks();
+  });
 });
 
 // used in _header partial
