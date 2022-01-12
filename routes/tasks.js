@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const categoryAssigner = require('./tools/categoryAssigner');
+const categoryAssigner = require('./tools/catAssign');
 
 module.exports = (db) => {
   router.get('/', (req, res) => {
