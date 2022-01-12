@@ -115,6 +115,11 @@ const insertIntoTasks = function (text, user_id) {
   if (categoryKeys['book'].includes(keyWord)) category = 'book';
   if (categoryKeys['product'].includes(keyWord)) category = 'product';
 
+
+  if (!category) {
+    category = 'product'
+  }
+  
   return pool.query(`
     INSERT INTO tasks (
       description,
