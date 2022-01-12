@@ -3,8 +3,6 @@ $(document).ready(function() {
   console.log('jquery loaded');
 
   $('#form1').submit(function(event) {
-    const taskText = $('#task-text').val();
-    // const markup = `<div><span class="listItem">${taskText}</span></div>`;
     event.preventDefault();
     console.log('submitting form');
 
@@ -23,7 +21,7 @@ $(document).ready(function() {
   });
 
   const createMarkup = function(data) {
-    return `<div><span class="listItem">${data.description} <button type="submit" id="list-delete">X</button></span></div>`;
+    return `<div><span class="listItem"><button type="submit" id="list-delete">X</button>${data.description}</span></div>`;
   };
 
   const fetchTasks = function() {
@@ -59,7 +57,6 @@ $(document).ready(function() {
     active: false
   });
   $('.accordion').accordion('refresh');
-
 });
 
 // used in _header partial

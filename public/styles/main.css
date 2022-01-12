@@ -53,8 +53,7 @@ body {
 #form1 {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 15%;
-  margin-top: 15%;
+  margin-bottom: 8%;
 }
 
 #task-text {
@@ -84,7 +83,7 @@ body {
   margin: 1.5%;
   padding: 2%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   background-color: white;
   border-radius: 5px;
 }
@@ -92,7 +91,9 @@ body {
 #list-delete {
   border-radius: 35vw;
   border: none;
-  margin-left: 1vw;
+  margin-right: 1vw;
+  background-color: none;
+  border: 1px solid lightgrey;
 }
 
 .listContents {

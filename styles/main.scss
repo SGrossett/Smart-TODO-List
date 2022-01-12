@@ -3,8 +3,6 @@ body {
   background-color: #fcfcfc;
 }
 
-
-
 // navigation
 // positions the header bar
 .fixed-header {
@@ -46,10 +44,7 @@ body {
   color: dimgray;
 }
 
-
-
-
-
+// main
 .todo-section {
   display: flex;
   flex-direction: column;
@@ -63,8 +58,7 @@ body {
 #form1 {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 15%;
-  margin-top: 15%; // remove when header is added
+  margin-bottom: 8%;
 }
 #task-text{
   width: 85%;
@@ -87,7 +81,6 @@ body {
   padding: 2%;
   display: flex;
   margin-top: 1%;
-
   // styling
   border-radius: 5px;
 
@@ -101,7 +94,7 @@ body {
   margin: 1.5%;
   padding: 2%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
 
   // styling
   background-color: white;
@@ -111,7 +104,9 @@ body {
 #list-delete {
   border-radius: 35vw;
   border: none;
-  margin-left: 1vw;
+  margin-right: 1vw;
+  // background-color: none;
+  // border: 1px solid lightgrey;
 }
 // grouped list items ✅
 .listContents {
