@@ -68,6 +68,11 @@ app.get('/', (req, res) => {
     .catch((err) => console.log(err.message));
 });
 
+app.get('/cookie_user_id', (req, res) => {
+  const user_id = req.session.user_id;
+  res.json(user_id);
+});
+
 // for logout
 app.post('/logout', (req, res) => {
   res.render('index');
