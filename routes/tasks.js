@@ -2,14 +2,14 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = (db) => {
-  router.get('/all-tasks', (req, res) => {
+  router.get('/', (req, res) => {
     let query = `SELECT * FROM tasks`;
     console.log(query);
     db
       .query(query)
       .then((data) => {
         const tasks = data.rows;
-        res.json({ tasks });
+        res.json(tasks);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });

@@ -26,7 +26,7 @@ $(document).ready(function() {
 
   const fetchTasks = function() {
     $.ajax({
-      url: `/user-tasks`,
+      url: `/api/tasks`,
       method: 'GET'
     }).done((listItems) => {
       $('.listContents').empty();
@@ -57,14 +57,16 @@ $(document).ready(function() {
     active: false
   });
   $('.accordion').accordion('refresh');
+
+  fetchTasks();
 });
 
 // used in _header partial
 function navbarToggle() {
-  var x = document.getElementById("menu-links");
-  if (x.style.display === "block") {
-    x.style.display = "none";
+  var x = document.getElementById('menu-links');
+  if (x.style.display === 'block') {
+    x.style.display = 'none';
   } else {
-    x.style.display = "block";
+    x.style.display = 'block';
   }
 }

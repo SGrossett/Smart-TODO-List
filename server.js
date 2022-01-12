@@ -117,15 +117,6 @@ app.post('/user-tasks', (req, res) => {
   });
 });
 
-// todo rename to all-tasks
-app.get('/all-tasks', (req, res) => {
-  database.getAllTasks().then((tasks) => {
-    console.log(tasks);
-    // res.send(tasks);
-    res.json(tasks);
-  });
-});
-
 // --- DEV API ROUTES (TEMPORARY - REMOVE ON PROJECT COMPLETION ) -------------
 app.get('/get-tasks-from-user-id/:id', (req, res) => {
   database.getTasksFromUserId(req.params.id).then((tasks) => {
