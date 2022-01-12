@@ -131,3 +131,26 @@ const insertIntoTasks = function (text, user_id) {
   .catch((err) => console.log('Error:', err.message) );
 }
 exports.insertIntoTasks = insertIntoTasks
+
+
+const getFinishedTasks = () => {
+
+  console.log('In getFinishedTasks');
+
+  return pool
+  .query(`SELECT id, description, category FROM tasks WHERE date_finished IS NOT NULL ORDER BY date_finished DESC`)
+  .then((result) => result)
+  .catch((err) => err.message);
+};
+exports.getFinishedTasks = getFinishedTasks
+
+const getIncompleteTasks = () => {
+
+  console.log('In getIncompleteTasks');
+
+  return pool
+  .query(`SELECT id, description FROM tasks WHERE date_finished IS NULL`)
+  .then((result) => result)
+  .catch((err) => err.message);
+};
+exports.getIncompleteTasks = getIncompleteTasks
