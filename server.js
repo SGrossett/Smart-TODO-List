@@ -50,8 +50,10 @@ app.use(bodyParser.json());
 
 const usersRoutes = require('./routes/users');
 const tasksRoutes = require('./routes/tasks');
+// const loginsRoutes = require('./routes/logins');
 app.use('/api/users', usersRoutes(db));
 app.use('/api/tasks', tasksRoutes(db));
+// app.use('/api/logins', tasksRoutes(db));
 
 // Home page
 // Warning: avoid creating more routes in this file!
@@ -67,7 +69,8 @@ app.get('/', (req, res) => {
     })
     .catch((err) => console.log(err.message));
 });
-
+/* ---------Moved to logins.js--------------- */
+// comment out
 // for logout
 app.post('/logout', (req, res) => {
   res.render('index');
@@ -97,8 +100,12 @@ app.post('/register', (req, res) => {
     res.redirect('/');
   });
 });
+/* ------------------------------------------ */
+
 
 // --- API ROUTES -------------------------------------------------------------
+/* -------------Moved to tasks.js------------ */
+// comment out
 app.get('/user-tasks', (req, res) => {
   let user_id = req.session.user_id;
   database.getTasksFromUserId(user_id).then((tasks) => {
@@ -125,6 +132,8 @@ app.get('/all-tasks', (req, res) => {
     res.json(tasks);
   });
 });
+/* ------------------------------------------ */
+
 
 // --- DEV API ROUTES (TEMPORARY - REMOVE ON PROJECT COMPLETION ) -------------
 app.get('/get-tasks-from-user-id/:id', (req, res) => {

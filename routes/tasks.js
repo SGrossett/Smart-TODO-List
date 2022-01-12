@@ -29,5 +29,33 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
+
+  // NEW ADDITIONS
+  router.get('/user-tasks', (req, res) => {
+    let user_id = req.session.user_id;
+    database.getTasksFromUserId(user_id).then((tasks) => {
+      res.send(tasks);
+    });
+  });
+
+  router.post('/user-tasks', (req, res) => {
+    let user_id = req.session.user_id;
+    const body = req.body;
+    console.log('adding user tasks');
+
+    database.insertIntoTasks(body.text, user_id).then((result) => {
+      // console.log(result);
+      res.send();
+    });
+  });
+
+  // todo rename to all-tasks
+  router.get('/all-tasks', (req, res) => {
+    database.getAllTasks().then((tasks) => {
+      console.log(tasks);
+      // res.send(tasks);
+      res.json(tasks);
+    });
+  });
   return router;
 };
