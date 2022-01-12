@@ -35,30 +35,57 @@
         <section class="movies-container accordion">
           <div class="movies-header headerBar">Movies</div>
           <div class="movieTasks listContents">
-
             <% for (task of tasks) { %>
               <% if (task.category==='movie' ) {%>
-                <h2>
-                  <%= task.description%>
-                </h2>
+                  <span class="listItem">
+                    <button type="submit" id="list-delete">X</button>
+                    <%= task.description%>
+                  </span>
                 <% } %>
-                  <% } %>
+              <% } %>
           </div>
         </section>
 
         <section class="restaurants-container accordion">
           <div class="restaurants-header headerBar">Restaurants</div>
-          <div class="restaurantTasks listContents"></div>
+          <div class="restaurantTasks listContents">
+            <% for (task of tasks) { %>
+              <% if (task.category==='restaurant' ) {%>
+                  <span class="listItem">
+                    <button type="submit" id="list-delete">X</button>
+                    <%= task.description%>
+                  </span>
+                <% } %>
+              <% } %>
+          </div>
         </section>
 
         <section class="books-container accordion">
           <div class="books-header headerBar">Books</div>
-          <div class="bookTasks listContents"></div>
+          <div class="bookTasks listContents">
+            <% for (task of tasks) { %>
+              <% if (task.category==='book' ) {%>
+                  <span class="listItem">
+                    <button type="submit" id="list-delete">X</button>
+                    <%= task.description%>
+                  </span>
+                <% } %>
+              <% } %>
+          </div>
         </section>
 
         <section class="products-container accordion">
           <div class="products-header headerBar">Products</div>
-          <div class="productTasks listContents"></div>
+          <div class="productTasks listContents">
+            <% for (task of tasks) { %>
+              <% if (task.category==='product' ) {%>
+                  <span class="listItem">
+                    <button type="submit" id="list-delete">X</button>
+                    <%= task.description%>
+                  </span>
+                <% } %>
+              <% } %>
+          </div>
         </section>
       </main>
     </section>
