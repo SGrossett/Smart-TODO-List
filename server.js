@@ -58,14 +58,7 @@ app.use('/api/tasks', tasksRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  const user_id = req.session.user_id;
-  axios
-    .get(`http://localhost:8080/api/tasks/task-from-user/${user_id}`)
-    .then((response) => {
-      const tasks = response.data.tasks;
-      res.render('index', { tasks });
-    })
-    .catch((err) => console.log(err.message));
+  res.render('index');
 });
 
 app.get('/cookie_user_id', (req, res) => {
