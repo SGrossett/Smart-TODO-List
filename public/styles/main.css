@@ -1,12 +1,53 @@
 body {
+  font-family: "Arial", "Helvetica", sans-serif;
+  background-color: #fcfcfc;
+}
+
+.fixed-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.navbar a.menu-icon {
+  background: whitesmoke;
+}
+
+.active {
+  padding-left: 3vh;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: white;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.navbar #menu-links {
+  display: none;
+}
+
+.navbar a {
+  color: black;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+
+.navbar a:hover {
+  background-color: whitesmoke;
+  color: dimgray;
+}
+
+.todo-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-top: 10%;
   margin-left: 15%;
   margin-right: 15%;
-  font-family: "Arial", "Helvetica", sans-serif;
-  background-color: #fcfcfc;
 }
 
 #form1 {
@@ -24,9 +65,10 @@ body {
 }
 
 #form-submit {
-  border-radius: 35px;
+  border-radius: 35vw;
   border: none;
   width: 33px;
+  margin-left: 1vw;
 }
 
 .headerBar {
@@ -42,8 +84,15 @@ body {
   margin: 1.5%;
   padding: 2%;
   display: flex;
+  justify-content: space-between;
   background-color: white;
   border-radius: 5px;
+}
+
+#list-delete {
+  border-radius: 35vw;
+  border: none;
+  margin-left: 1vw;
 }
 
 .listContents {
@@ -56,17 +105,14 @@ body {
   width: 10px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
   background: none;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
   background: #888;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }

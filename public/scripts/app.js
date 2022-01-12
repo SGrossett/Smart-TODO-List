@@ -4,7 +4,7 @@ $(document).ready(function() {
 
   $('#form1').submit(function(event) {
     const taskText = $('#task-text').val();
-    const markup = `<div><span class="listItem">${taskText}</span></div>`;
+    // const markup = `<div><span class="listItem">${taskText}</span></div>`;
     event.preventDefault();
     console.log('submitting form');
 
@@ -23,7 +23,7 @@ $(document).ready(function() {
   });
 
   const createMarkup = function(data) {
-    return `<div><span class="listItem">${data.description}</span></div>`;
+    return `<div><span class="listItem">${data.description} <button type="submit" id="list-delete">X</button></span></div>`;
   };
 
   const fetchTasks = function() {
@@ -59,4 +59,15 @@ $(document).ready(function() {
     active: false
   });
   $('.accordion').accordion('refresh');
+
 });
+
+// used in _header partial
+function navbarToggle() {
+  var x = document.getElementById("menu-links");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
