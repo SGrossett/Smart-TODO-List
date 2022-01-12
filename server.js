@@ -50,25 +50,24 @@ app.use(bodyParser.json());
 
 const usersRoutes = require('./routes/users');
 const tasksRoutes = require('./routes/tasks');
-// const loginsRoutes = require('./routes/logins');
 app.use('/api/users', usersRoutes(db));
 app.use('/api/tasks', tasksRoutes(db));
-// app.use('/api/logins', tasksRoutes(db));
 
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  res.render('index');
+  const user_id = req.session.user_id;
+  axios
+    .get(`http://localhost:8080/api/tasks/task-from-user/${user_id}`)
+    .then((response) => {
+      const tasks = response.data.tasks;
+      res.render('index', { tasks });
+    })
+    .catch((err) => console.log(err.message));
 });
 
-app.get('/cookie_user_id', (req, res) => {
-  const user_id = req.session.user_id;
-  res.json(user_id);
-});
-/* ---------Moved to logins.js--------------- */
-// comment out
 // for logout
 app.post('/logout', (req, res) => {
   res.render('index');
@@ -98,10 +97,14 @@ app.post('/register', (req, res) => {
     res.redirect('/');
   });
 });
-/* ------------------------------------------ */
-
 
 // --- API ROUTES -------------------------------------------------------------
+app.get('/user-tasks', (req, res) => {
+  let user_id = req.session.user_id;
+  database.getTasksFromUserId(user_id).then((tasks) => {
+    res.send(tasks);
+  });
+});
 
 app.post('/user-tasks', (req, res) => {
   let user_id = req.session.user_id;
@@ -111,6 +114,23 @@ app.post('/user-tasks', (req, res) => {
   database.insertIntoTasks(body.text, user_id).then((result) => {
     // console.log(result);
     res.send();
+  });
+});
+
+// todo rename to all-tasks
+app.get('/all-tasks', (req, res) => {
+  database.getAllTasks().then((tasks) => {
+    console.log(tasks);
+    // res.send(tasks);
+    res.json(tasks);
+  });
+});
+
+// --- DEV API ROUTES (TEMPORARY - REMOVE ON PROJECT COMPLETION ) -------------
+app.get('/get-tasks-from-user-id/:id', (req, res) => {
+  database.getTasksFromUserId(req.params.id).then((tasks) => {
+    console.log(tasks);
+    res.send(tasks);
   });
 });
 
