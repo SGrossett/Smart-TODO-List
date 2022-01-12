@@ -15,7 +15,7 @@ $(document).ready(function() {
     console.log('submitting form');
 
     $.ajax({
-      url: `/user-tasks`,
+      url: `/api/tasks`,
       method: 'POST',
       data: $(this).serialize()
     })
