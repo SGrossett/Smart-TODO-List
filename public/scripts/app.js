@@ -21,7 +21,7 @@ $(document).ready(function() {
   });
 
   const createMarkup = function(data) {
-    return `<div><span class="listItem"><button type="submit" id="list-delete">X</button>${data.description}</span></div>`;
+    return `<div><span class="listItem"><input type="checkbox" id="list-delete"></input>${data.description}</span></div>`;
   };
 
   const fetchTasks = function() {
@@ -31,24 +31,24 @@ $(document).ready(function() {
     }).done((listItems) => {
       $('.listContents').empty();
 
-      // listItems.map((item) => {
-      //   // add item to movies
-      //   if (item.category === 'movie') {
-      //     $('.movieTasks').prepend(createMarkup(item));
-      //   }
-      //   // add item to restaurants
-      //   if (item.category === 'restaurant') {
-      //     $('.restaurantTasks').prepend(createMarkup(item));
-      //   }
-      //   // add item to books
-      //   if (item.category === 'book') {
-      //     $('.bookTasks').prepend(createMarkup(item));
-      //   }
-      //   // add item to products
-      //   if (item.category === 'product') {
-      //     $('.productTasks').prepend(createMarkup(item));
-      //   }
-      // });
+      listItems.map((item) => {
+        // add item to movies
+        if (item.category === 'movie') {
+          $('.movieTasks').prepend(createMarkup(item));
+        }
+        // add item to restaurants
+        if (item.category === 'restaurant') {
+          $('.restaurantTasks').prepend(createMarkup(item));
+        }
+        // add item to books
+        if (item.category === 'book') {
+          $('.bookTasks').prepend(createMarkup(item));
+        }
+        // add item to products
+        if (item.category === 'product') {
+          $('.productTasks').prepend(createMarkup(item));
+        }
+      });
     });
   };
 
