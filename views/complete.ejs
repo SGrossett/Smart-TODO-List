@@ -16,7 +16,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
     <!-- App JS -->
+    <script type="text/javascript" src="./scripts/client.js"></script>
+
   </head>
 
   <body>
@@ -27,11 +30,11 @@
     <label for="active" class="close"></label>
     <div class="wrapper">
       <ul>
-        <li><a href="#">User Name</a></li>
-        <li><a href="#">Completed</a></li>
-        <li><a href="#">Important</a></li>
-        <li><a href="#">Tasks</a></li>
-        <li><a href="#">Logout</a></li>
+        <li><a href="#"><i class="user-icon fas fa-sun"></i>User Name</a></li>
+        <li><a href="/"><i class="tasks-icon fas fa-tasks"></i>Tasks</a></li>
+        <li><a href="#"><i class="important-icon far fa-star"></i>Important</a></li>
+        <li><a href="/completed"><i class="completed-icon fas fa-check-circle"></i>Completed</a></li>
+        <li><a href="/logout"><i class="logout-icon fas fa-sign-out-alt"></i>Logout</a></li>
       </ul>
     </div>
 
@@ -39,28 +42,14 @@
     <!-- Page-specific (main) content here -->
     <main class="container">
       <section id="task-container">
+        <% for (task of tasks) { %>
+          <div class="form-control">
+            <input type="checkbox" class="checkbox incomplete" id="<%= task.id %>" name="<%= task.category %>" value="<%= task.description %>" checked>
+            <%= task.description %>
+          </div>
+              <% } %>
 
-          <!-- <label class="form-control">
-            <input type="checkbox" class="checkbox incomplete" id="1" name="naruto" value="movie">
-            Finish wathing Naruto
-          </label>
-
-          <label class="form-control">
-            <input type="checkbox" class="checkbox incomplete" id="2" name="spiderman" value="movie">
-            Watch new Spidermam movie
-          </label>
-
-          <label class="form-control">
-            <input type="checkbox" class="checkbox incomplete" id="3" name="kdrama" value="movie">
-            Catch up on kdramas
-          </label>
-
-          <label class="form-control">
-            <input type="checkbox" class="checkbox incomplete" id="4" name="extra" value="movie">
-            Checkbox - checked
-          </label> -->
-
-          <%- include('partials/_footer') %> 
+          <%- include('partials/_footer') %>
       </section>
     </main>
   </body>
