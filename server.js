@@ -51,6 +51,8 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
+
+
 // for logout
 app.post('/logout', (req, res) => {
   res.render('index');
@@ -105,6 +107,16 @@ app.get('/all-tasks', (req, res) => {
     // res.send(tasks);
     res.json(tasks);
   });
+});
+
+app.get('/completed', (req, res) => {
+  database.getFinishedTasks()
+  .then((task) => {
+    console.log(task.rows);
+    res.render('complete', { tasks: task.rows });
+  });
+
+  //res.json(task);
 });
 
 // --- DEV API ROUTES (TEMPORARY - REMOVE ON PROJECT COMPLETION ) -------------
