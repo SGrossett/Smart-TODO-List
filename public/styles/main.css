@@ -1,70 +1,117 @@
 body {
+  font-family: "Arial", "Helvetica", sans-serif;
+  background-color: #fcfcfc;
+}
+
+.fixed-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.navbar a.menu-icon {
+  background: whitesmoke;
+}
+
+.active {
+  padding-left: 3vh;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: white;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.navbar #menu-links {
+  display: none;
+}
+
+.navbar a {
+  color: black;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+
+.navbar a:hover {
+  background-color: whitesmoke;
+  color: dimgray;
+}
+
+.todo-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 10%;
-  margin-right: 10%;
-}
-
-nav {
-  background-color: bisque;
-  display: flex;
-  justify-content: center;
   margin-top: 10%;
+  margin-left: 15%;
+  margin-right: 15%;
 }
 
 #form1 {
-  background-color: cadetblue;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 8%;
 }
 
-.container {
-  border: 2px solid black;
+#task-text {
+  width: 85%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
 }
 
-.categoryHeader {
-  background-color: cornsilk;
+#form-submit {
+  border-radius: 35vw;
+  border: none;
+  width: 33px;
+  margin-left: 1vw;
 }
 
-.movies-container {
-  background-color: crimson;
-  height: fit-content;
-}
-
-.movieTasks {
-  background-color: blue;
-  height: 100px;
-  overflow-y: scroll;
-}
-
-.bookTasks {
-  height: 100px;
-  overflow-y: scroll;
-}
-
-.restaurantTasks {
-  height: 100px;
-  overflow-y: scroll;
-}
-
-.productTasks {
-  height: 100px;
-  overflow-y: scroll;
-}
-
-.restaurants-container {
-  background-color: darkgrey;
-}
-
-.books-container {
-  background-color: darkgreen;
-}
-
-.products-container {
-  background-color: darkseagreen;
+.headerBar {
+  padding: 2%;
+  display: flex;
+  margin-top: 1%;
+  border-radius: 5px;
+  background-color: white;
+  border: 1px solid lightgrey;
 }
 
 .listItem {
-  background-color: coral;
+  margin: 1.5%;
+  padding: 2%;
+  display: flex;
+  justify-content: flex-start;
+  background-color: white;
+  border-radius: 5px;
+}
+
+#list-delete {
+  border-radius: 35vw;
+  border: none;
+  margin-right: 1vw;
+}
+
+.listContents {
+  height: 15vh;
+  overflow-y: scroll;
+  padding-left: 3%;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
