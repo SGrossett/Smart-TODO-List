@@ -97,12 +97,6 @@ app.post('/register', (req, res) => {
 });
 
 // --- API ROUTES -------------------------------------------------------------
-app.get('/user-tasks', (req, res) => {
-  let user_id = req.session.user_id;
-  database.getTasksFromUserId(user_id).then((tasks) => {
-    res.send(tasks);
-  });
-});
 
 app.post('/user-tasks', (req, res) => {
   let user_id = req.session.user_id;
@@ -112,14 +106,6 @@ app.post('/user-tasks', (req, res) => {
   database.insertIntoTasks(body.text, user_id).then((result) => {
     // console.log(result);
     res.send();
-  });
-});
-
-// --- DEV API ROUTES (TEMPORARY - REMOVE ON PROJECT COMPLETION ) -------------
-app.get('/get-tasks-from-user-id/:id', (req, res) => {
-  database.getTasksFromUserId(req.params.id).then((tasks) => {
-    console.log(tasks);
-    res.send(tasks);
   });
 });
 
