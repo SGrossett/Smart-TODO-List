@@ -1,60 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Meta Information -->
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
-    <title>Smart-TODO-List - Home Page</title>
 
-    <!-- External CSS -->
-    <link rel="stylesheet" href="./styles/main.css" type="text/css"/>
-    <!-- App CSS -->
+<head>
+  <!-- Meta Information -->
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+  <title>Smart-TODO-List - Home Page</title>
 
-    <!-- External JS -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+  <!-- External CSS -->
+  <link rel="stylesheet" href="./styles/main.css" type="text/css" />
+  <!-- App CSS -->
 
-    <!-- App JS -->
-  </head>
+  <!-- External JS -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 
-  <body>
-    <%- include('partials/_header') %>
+  <!-- App JS -->
+</head>
+
+<body>
+  <%- include('partials/_header') %>
 
     <section class="todo-section">
 
       <div>
-       <form id="form1" action="/tasks" method="POST">
-         <input type="text" name="text" id="task-text"></input>
-         <button type="submit" id="form-submit">+</button>
-       </form>
+        <form id="form1" action="/tasks" method="POST">
+          <input type="text" name="text" id="task-text"></input>
+          <button type="submit" id="form-submit">+</button>
+        </form>
       </div>
 
-       <!-- Page-specific (main) content here -->
-       <main class="container" >
-         <section class="movies-container accordion">
-           <div class="movies-header headerBar">Movies</div>
-           <div class="movieTasks listContents"></div>
-         </section>
+      <!-- Page-specific (main) content here -->
+      <main class="container">
+        <section class="movies-container accordion">
+          <div class="movies-header headerBar">Movies</div>
+          <div class="movieTasks listContents"></div>
+          <% for (task of tasks) { %>
+            <% if (task.category==='movie' ) {%>
+              <h2>
+                <%= task.description%>
+              </h2>
+              <% } %>
+                <% } %>
+        </section>
 
-         <section class="restaurants-container accordion">
-           <div class="restaurants-header headerBar">Restaurants</div>
-           <div class="restaurantTasks listContents"></div>
-         </section>
+        <section class="restaurants-container accordion">
+          <div class="restaurants-header headerBar">Restaurants</div>
+          <div class="restaurantTasks listContents"></div>
+        </section>
 
-         <section class="books-container accordion">
-           <div class="books-header headerBar">Books</div>
-           <div class="bookTasks listContents"></div>
-         </section>
+        <section class="books-container accordion">
+          <div class="books-header headerBar">Books</div>
+          <div class="bookTasks listContents"></div>
+        </section>
 
-         <section class="products-container accordion">
-           <div class="products-header headerBar">Products</div>
-           <div class="productTasks listContents"></div>
-         </section>
-       </main>
+        <section class="products-container accordion">
+          <div class="products-header headerBar">Products</div>
+          <div class="productTasks listContents"></div>
+        </section>
+      </main>
     </section>
 
-  </body>
-  <script src="./scripts/app.js"></script>
-  <%- include('partials/_footer') %>
-</html>
+</body>
+<script src="./scripts/app.js"></script>
+<%- include('partials/_footer') %>
 
+</html>

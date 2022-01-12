@@ -1,4 +1,5 @@
 // load .env data into process.env
+const fake_data = require('./routes/fakedata');
 require('dotenv').config();
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
@@ -48,7 +49,10 @@ app.use(bodyParser.json());
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  res.render('index');
+  const tasks = fake_data;
+  
+  res.render('index', { tasks });
+  // res.send(fake_data);
 });
 
 // for logout
@@ -96,7 +100,7 @@ app.post('/user-tasks', (req, res) => {
 
   database.insertIntoTasks(body.text, user_id).then((result) => {
     // console.log(result);
-    res.send()
+    res.send();
   });
 });
 
