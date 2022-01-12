@@ -1,4 +1,5 @@
 const axios = require('axios').default;
+const cookieParser = require('cookie-parser')
 
 // load .env data into process.env
 const fake_data = require('./routes/fakedata');
@@ -22,6 +23,7 @@ const db = new Pool(dbParams);
 db.connect();
 
 // MIDDLEWARE
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cookieSession({
@@ -63,6 +65,7 @@ app.get('/', (req, res) => {
 
 app.get('/cookie_user_id', (req, res) => {
   const user_id = req.session.user_id;
+  console.log(req.cookies.user_id)
   res.json(user_id);
 });
 
@@ -79,7 +82,7 @@ app.post('/login', (req, res) => {
   let { email } = req.body;
 
   database.getIdFromEmail(email).then((user_id) => {
-    req.session.user_id = user_id;
+    res.cookie('user_id', user_id);
     res.redirect('/');
   });
 });
@@ -91,7 +94,7 @@ app.get('/register', (req, res) => {
 app.post('/register', (req, res) => {
   let { email } = req.body;
   database.addUserWithEmail(email).then((user_id) => {
-    req.session.user_id = user_id;
+    res.cookie('user_id', user_id);
     res.redirect('/');
   });
 });
@@ -99,7 +102,7 @@ app.post('/register', (req, res) => {
 // --- API ROUTES -------------------------------------------------------------
 
 app.post('/user-tasks', (req, res) => {
-  let user_id = req.session.user_id;
+  let user_id = req.cookies.user_id
   const body = req.body;
   console.log('adding user tasks');
 

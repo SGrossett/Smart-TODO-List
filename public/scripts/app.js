@@ -1,7 +1,14 @@
+function getUserId() {
+  let cookieArray = document.cookie.replace(/ /g, '').split(';');
+  let userIdParam = cookieArray.find((cookie) => cookie.includes('user_id'));
+  const user_id = userIdParam.split('=')[1];
+  return user_id;
+}
+
 // JQuery - add items to list
 $(document).ready(function() {
   console.log('jquery loaded');
-  let user_id;
+  const user_id = getUserId();
 
   $('#form1').submit(function(event) {
     event.preventDefault();
@@ -59,10 +66,7 @@ $(document).ready(function() {
   });
   $('.accordion').accordion('refresh');
 
-  $.get('/cookie_user_id', (res) => {
-    user_id = res;
-    fetchTasks();
-  });
+  fetchTasks();
 });
 
 // used in _header partial
