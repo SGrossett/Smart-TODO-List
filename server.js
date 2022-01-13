@@ -137,22 +137,59 @@ app.post('/updateToFinished', (req, res) => {
   });
 });
 
-app.get('/edit-task/:id', (req, res) => {
-  const id = req.params.id;
-  res.send(id); // todo replace with res.render('edit-task') when html complete
+app.get('/edit-task/:task_id', (req, res) => {
+  const task_id = req.params.task_id;
+  database
+    .getTaskFromId(task_id)
+    .then((task) => {
+      res.send(task); // todo replace with res.render('edit-task', {task}) when html complete
+    })
+    .catch((err) => console.log(err.message));
 });
 
-app.post('/edit-task/:id', (req, res) => {
-  const id = req.params.id;
+app.post('/edit-task/:task_id', (req, res) => {
+  const task_id = req.params.task_id;
   const { task, category } = req.body;
   database
-    .updateTask(task, category, id)
+    .updateTask(task, category, task_id)
     .then(() => {
       res.redirect('/');
     })
     .catch((err) => {
       res.send(err.message);
     });
+});
+
+app.get('/edit-user', (req, res) => {
+  const user_id = req.cookies.user_id;
+
+  if (user_id) {
+    database
+      .getEmailFromId(user_id)
+      .then((email) => {
+        res.send({ user_id, email }); // todo replace with res.render('edit-user', {user_id, email}) when html complete
+      })
+      .catch((err) => console.log(err));
+  } else {
+    res.redirect('/login');
+  }
+});
+
+app.post('/edit-user', (req, res) => {
+  const user_id = req.cookies.user_id;
+  if (user_id) {
+    const { email } = req.body;
+    database
+      .updateUser(email, id)
+      .then(() => {
+        res.redirect('/');
+      })
+      .catch((err) => {
+        res.send(err.message);
+      });
+  } else {
+    res.redirect('/login');
+  }
 });
 
 app.post('/user-tasks/complete-task', (req, res) => {
