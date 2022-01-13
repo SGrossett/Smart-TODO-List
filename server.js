@@ -142,7 +142,7 @@ app.get('/edit-task/:task_id', (req, res) => {
   database
     .getTaskFromId(task_id)
     .then((task) => {
-      res.send(task); // todo replace with res.render('edit-task', {task}) when html complete
+      res.render('edit-task', {task}); // todo replace with res.render('edit-task', {task}) when html complete
     })
     .catch((err) => console.log(err.message));
 });
