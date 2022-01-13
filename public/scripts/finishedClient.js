@@ -21,4 +21,12 @@ $(document).ready(function() {
   $(`#burger`).on('click', function() {
     $(`.container`).toggle(600);
   });
+
+
+  $(`.fa-edit`).on('click', function() {
+    // let id = $(this).attr('id');
+    $(location).attr('href',`http://localhost:8080/edit-task/`);
+
+    console.log('clicked:', id);
+  })
 });
