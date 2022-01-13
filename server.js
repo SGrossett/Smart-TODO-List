@@ -94,6 +94,36 @@ app.get('/tasks/:task_id', (req, res) => {
     .catch((err) => console.log('ERROR,', err.message));
 });
 
+app.get('/completed', (req, res) => {
+  database.getFinishedTasks()
+  .then((task) => {
+    res.render('complete', {tasks: task.rows});
+  });
+});
+
+app.get('/incomplete', (req, res) => {
+  console.log('in /incomplete');
+  database.getIncompleteTasks()
+  .then((task) => {
+    res.render('incomplete', {tasks: task.rows});
+  });
+});
+
+app.post('/updateToIncomplete', (req, res) => {
+  console.log('going to update')
+  let id  = req.body.task_id;
+  database.makeIncomplete(id)
+  res.redirect('/completed');
+});
+
+app.post('/updateToFinished', (req, res) => {
+  let id  = req.body.task_id;
+  database.markCompleted(id)
+  .then((result) => {
+    res.redirect('/completed')
+    return result;
+  });
+});
 // --- API ROUTES -------------------------------------------------------------
 
 app.listen(PORT, () => {

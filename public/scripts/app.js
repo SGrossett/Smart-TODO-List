@@ -38,7 +38,7 @@ $(document).ready(function() {
       method: 'GET'
     }).done((listItems) => {
       $('.listContents').empty();
-
+      console.log(listItems);
       listItems.map((item) => {
         // add item to movies
         if (item.category === 'movie') {
