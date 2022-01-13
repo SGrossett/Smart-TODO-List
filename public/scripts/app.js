@@ -29,7 +29,13 @@ $(document).ready(function() {
 
 
   const createMarkup = function(item, selectorID) {
-    return `<div><span class="listItem"><button id="${selectorID}"></button>${item.description}</span></div>`;
+    return `
+    <div>
+      <span class="listItem">
+        <button id="${selectorID}">X</button>
+        ${item.description}
+      </span>
+    </div>`;
   };
 
   const fetchTasks = function() {
@@ -78,16 +84,9 @@ $(document).ready(function() {
   fetchTasks();
   /* ------User verification--------*/
 
-  $.get('/cookie_user_id', (res) => {
-    user_id = res;
-    fetchTasks();
-  });
+  fetchTasks();
 
   /* --------Removing Items----------*/
-  /*
-    add date_finished, same as date_created
-    add filter to list, to remove from main page
-  */
 
 
   const finishTask = function(id) {

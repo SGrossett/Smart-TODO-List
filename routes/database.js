@@ -77,7 +77,7 @@ const markCompleted = (id) => {
   );
 };
 exports.markCompleted = markCompleted;
-exports.insertIntoTasks = insertIntoTasks;
+// exports.insertIntoTasks = insertIntoTasks;
 
 // NEW delete function - ADD end date to db
 const addDateFinished = function(id) {
