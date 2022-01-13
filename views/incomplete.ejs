@@ -6,36 +6,38 @@
     <title>Smart-TODO-List - Home Page</title>
 
     <!-- External CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 
     <!-- App CSS -->
+    <link rel="stylesheet" href="../styles/viewTasks.css">
+    <link rel="stylesheet" href="../styles/header.css">
+
 
     <!-- External JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <!-- App JS -->
-    <script type="text/javascript" src="/scripts/incompleteClient.js"></script>
+    <script type="text/javascript" src="../scripts/incompleteClient.js"></script>
 
   </head>
 
   <body>
     <!-- Top nav bar (fixed) -->
-    <nav>
-      <div>
-        <span>APP NAME</span>
-      </div>
-    </nav>
+    <%- include('partials/_header') %>
+    <h2>Incomplete</h2>
 
     <!-- Page-specific (main) content here -->
-    <main class="container">
-      <section id="movies-container">Incomplete</section>
-    </main>
-
     <main class="container">
       <section id="task-container">
         <% for (task of tasks) { %>
           <div class="form-control">
             <input type="checkbox" class="checkbox incomplete" id="<%= task.id %>" name="<%= task.category %>" value="<%= task.description %>">
-            <%= task.description %>
+            <div id="description-text"><%= task.description %></div>
+
+            <div class='edit-delete'>
+              <button class="icon"><i class="edit far fa-edit"></i></button>
+              <button class="icon"><i class="delete far fa-trash-alt"></i></button>
+            </div>
           </div>
               <% } %>
           <%- include('partials/_footer') %>
