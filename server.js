@@ -160,6 +160,18 @@ app.post('/edit-task/:task_id', (req, res) => {
     });
 });
 
+app.post('/delete/:task_id', (req, res) => {
+  const task_id = req.params.task_id;
+  database
+    .deleteTask(task_id)
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      res.send(err.message);
+    });
+})
+
 app.get('/edit-user', (req, res) => {
   const user_id = req.cookies.user_id;
 

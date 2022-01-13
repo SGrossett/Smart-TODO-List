@@ -162,3 +162,11 @@ const getEmailFromId = function(user_id) {
     .catch((err) => console.log('Error:', err.message));
 };
 exports.getEmailFromId = getEmailFromId;
+
+const deleteTask = function(id) {
+  return pool
+    .query(`DELETE FROM tasks WHERE id = $1`, [ id ])
+    .then((result) => result)
+    .catch((err) => console.log('Error:', err.message));
+};
+exports.deleteTask = deleteTask;
