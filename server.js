@@ -132,6 +132,18 @@ app.post('/user-tasks/delete', (req, res) => {
     res.send();
   });
 })
+/* -------Edit Profile----------*/
+// EDIT GET REQ TO RENDER PAGE
+app.get('/user-profile/edit', (req, res) => {
+  res.render('profile');
+});
+app.post('/user-profile/edit', (req, res) => {
+  console.log(req.body.id);
+  database.updateEmail(req.body.id).then((result) => {
+    console.log(result);
+    res.send();
+  });
+})
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
