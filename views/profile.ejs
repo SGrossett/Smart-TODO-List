@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile - Smart-TODO-List</title>
+    <!-- SCRIPTS -->
   </head>
 
   <body>
     <!-- <%- include('partials/_header') %> -->
-    <!-- editing ^, shows up weird atm -->
 
     <h2>PROFILE PAGE</h2>
 
@@ -25,7 +25,7 @@
 
     <div>
       <form action="/edit-user" method="POST" id="editEmailForm">
-        <input type="text" id="editEmailFormText"></input>
+        <input type="text" id="editEmailFormText" value="<%= email %>" name="email"></input>
         <button type="submit" id="editEmailSubmit">+</button>
       </form>
     </div>
