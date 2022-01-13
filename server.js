@@ -109,6 +109,13 @@ app.post('/user-tasks', (req, res) => {
   });
 });
 
+app.post('/user-tasks/delete', (req, res) => {
+  database.addDateFinished(req.body.id).then((result) => {
+    console.log(result);
+    res.send();
+  });
+})
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
