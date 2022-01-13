@@ -76,15 +76,11 @@ const categoryAssigner = function(text) {
     product: [ 'more', 'buy' ]
   };
 
-  let category = '';
+  let category = undefined;
   if (categoryKeys['movie'].includes(keyWord)) category = 'movie';
   if (categoryKeys['restaurant'].includes(keyWord)) category = 'restaurant';
   if (categoryKeys['book'].includes(keyWord)) category = 'book';
   if (categoryKeys['product'].includes(keyWord)) category = 'product';
-
-  if (!category) {
-    category = 'product';
-  }
 
   return category;
 };

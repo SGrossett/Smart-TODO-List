@@ -121,8 +121,8 @@ const updateTask = function(task, category, id) {
       `
       UPDATE tasks
       SET
-      task = $1,
-      category = $2,
+      description = $1,
+      category = $2
       WHERE id = $3
       `,
       [ task, category, id ]

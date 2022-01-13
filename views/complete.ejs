@@ -16,7 +16,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <!-- App JS -->
-    <script type="text/javascript" src="/scripts/finishedClient.js"></script>
+    <script type="text/javascript" src="/scripts/taskViews.js"></script>
 
   </head>
 
@@ -30,12 +30,12 @@
       <section id="task-container">
         <% for (task of tasks) { %>
           <div class="form-control">
-            <input type="checkbox" class="checkbox incomplete" id="<%= task.id %>" name="<%= task.category %>" value="<%= task.description %>" checked>
+            <input type="checkbox" class="checkbox" id="<%= task.id %>" name="<%= task.category %>" value="<%= task.description %>" checked>
             <div id="description-text"><%= task.description %></div>
 
             <div class='edit-delete'>
-              <button class="icon"><i class="edit far fa-edit"></i></button>
-              <button class="icon"><i class="delete far fa-trash-alt"></i></button>
+              <button class="icon"><i id="<%= task.id %>" class="edit far fa-edit"></i></button>
+              <button class="icon"><i id="<%= task.id %>" class="delete far fa-trash-alt"></i></button>
             </div>
           </div>
               <% } %>
