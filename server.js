@@ -85,7 +85,7 @@ app.post('/register', (req, res) => {
   });
 });
 
-app.get('/tasks/:task_id', (req, res) => {
+app.get('/tasks/edit/:task_id', (req, res) => {
   const task_id = req.params.task_id;
   axios(`http://localhost:8080/api/tasks/${task_id}`)
     .then((task) => {
