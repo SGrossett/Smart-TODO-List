@@ -1,3 +1,5 @@
+const axios = require('axios').default;
+
 // load .env data into process.env
 const fake_data = require('./routes/fakedata');
 require('dotenv').config();
@@ -13,9 +15,11 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 
-// Load the logger first so all (static) HTTP requests are logged to STDOUT
-// 'dev' = Concise output colored by response status for development use.
-//         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
+// PG database client/connection setup
+const { Pool } = require('pg');
+const dbParams = require('./lib/db.js');
+const db = new Pool(dbParams);
+db.connect();
 
 // MIDDLEWARE
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -44,18 +48,23 @@ app.use(
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
+const usersRoutes = require('./routes/users');
+const tasksRoutes = require('./routes/tasks');
+app.use('/api/users', usersRoutes(db));
+app.use('/api/tasks', tasksRoutes(db));
+
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  const tasks = fake_data;
-
-  res.render('index', { tasks });
-  // res.send(fake_data);
+  res.render('index');
 });
 
-
+app.get('/cookie_user_id', (req, res) => {
+  const user_id = req.session.user_id;
+  res.json(user_id);
+});
 
 // for logout
 app.post('/logout', (req, res) => {
@@ -87,13 +96,37 @@ app.post('/register', (req, res) => {
   });
 });
 
-// --- API ROUTES -------------------------------------------------------------
-app.get('/user-tasks', (req, res) => {
-  let user_id = req.session.user_id;
-  database.getTasksFromUserId(user_id).then((tasks) => {
-    res.send(tasks);
+app.get('/completed', (req, res) => {
+  database.getFinishedTasks()
+  .then((task) => {
+    res.render('complete', {tasks: task.rows});
   });
 });
+
+app.get('/incomplete', (req, res) => {
+  console.log('in /incomplete');
+  database.getIncompleteTasks()
+  .then((task) => {
+    res.render('incomplete', {tasks: task.rows});
+  });
+});
+
+app.post('/updateToIncomplete', (req, res) => {
+  console.log('going to update')
+  let id  = req.body.task_id;
+  database.makeIncomplete(id)
+  res.redirect('/completed');
+});
+
+app.post('/updateToFinished', (req, res) => {
+  let id  = req.body.task_id;
+  database.markCompleted(id)
+  .then((result) => {
+    res.redirect('/completed')
+    return result;
+  });
+});
+// --- API ROUTES -------------------------------------------------------------
 
 app.post('/user-tasks', (req, res) => {
   let user_id = req.session.user_id;
@@ -103,42 +136,6 @@ app.post('/user-tasks', (req, res) => {
   database.insertIntoTasks(body.text, user_id).then((result) => {
     // console.log(result);
     res.send();
-  });
-});
-
-// todo rename to all-tasks
-app.get('/all-tasks', (req, res) => {
-  database.getAllTasks().then((tasks) => {
-    console.log(tasks);
-    // res.send(tasks);
-    res.json(tasks);
-  });
-});
-
-app.get('/completed', (req, res) => {
-  database.getFinishedTasks()
-  .then((task) => {
-    console.log(task.rows);
-    res.render('complete', {tasks: task.rows});
-    // res.json(task.rows);
-  });
-
-});
-
-// app.get('/complete', (req, res) => {
-//   database.getFinishedTasks()
-//   .then((task) => {
-//     console.log(task.rows);
-//     res.json(task.rows);
-//   });
-
-// });
-
-// --- DEV API ROUTES (TEMPORARY - REMOVE ON PROJECT COMPLETION ) -------------
-app.get('/get-tasks-from-user-id/:id', (req, res) => {
-  database.getTasksFromUserId(req.params.id).then((tasks) => {
-    console.log(tasks);
-    res.send(tasks);
   });
 });
 

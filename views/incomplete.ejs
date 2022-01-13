@@ -13,6 +13,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <!-- App JS -->
+    <script type="text/javascript" src="/scripts/incompleteClient.js"></script>
+
   </head>
 
   <body>
@@ -26,6 +28,18 @@
     <!-- Page-specific (main) content here -->
     <main class="container">
       <section id="movies-container">Incomplete</section>
+    </main>
+
+    <main class="container">
+      <section id="task-container">
+        <% for (task of tasks) { %>
+          <div class="form-control">
+            <input type="checkbox" class="checkbox incomplete" id="<%= task.id %>" name="<%= task.category %>" value="<%= task.description %>">
+            <%= task.description %>
+          </div>
+              <% } %>
+          <%- include('partials/_footer') %>
+      </section>
     </main>
   </body>
   <%- include('partials/_footer') %>

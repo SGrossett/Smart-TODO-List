@@ -8,41 +8,6 @@ const pool = new Pool({
   port: process.env.DB_PORT
 });
 
-const getAllTasks = function () {
-  return pool
-    .query(`SELECT * FROM tasks`)
-    .then((tasks) => {
-      if (tasks.rows) {
-        return tasks.rows;
-      } else {
-        return null;
-      }
-    })
-    .catch((err) => console.log(err.message));
-};
-exports.getAllTasks = getAllTasks
-
-const getTasksFromUserId = function(user_id) {
-  return pool
-    .query(
-      `
-    SELECT * FROM tasks
-    JOIN users ON tasks.user_id = users.id
-    WHERE $1 = tasks.user_id
-    `,
-      [ user_id ]
-    )
-    .then((tasks) => {
-      if (tasks.rows) {
-        return tasks.rows;
-      } else {
-        return null;
-      }
-    })
-    .catch((err) => console.log(err.message));
-};
-exports.getTasksFromUserId = getTasksFromUserId
-
 const getIdFromEmail = function(email) {
   return pool
     .query(
@@ -57,7 +22,7 @@ const getIdFromEmail = function(email) {
       return result.rows[0].id;
     });
 };
-exports.getIdFromEmail = getIdFromEmail
+exports.getIdFromEmail = getIdFromEmail;
 
 const addUserWithEmail = function(email) {
   return pool
@@ -73,24 +38,43 @@ const addUserWithEmail = function(email) {
       return email.rows[0].id;
     });
 };
-exports.addUserWithEmail = addUserWithEmail
+exports.addUserWithEmail = addUserWithEmail;
 
-const insertIntoTasks = function (text, user_id) {
+const insertIntoTasks = function(text, user_id) {
   const task = text;
-  console.log('task:', task)
+  console.log('task:', task);
   const allKeyWords = [
-    'movie',      'watch',       'show',
-    'drama',      'Netflix',     'Hulu',
-    'Disney',     'HBO',         'cartoon',
-    'anime',      'Crunchyroll', 'cable',
-    'restaurant', 'dinner',      'eat',
-    'takeout',    'food',        'menu',
-    'dine',       'lunch',       'brunch',
-    'drink',      'tea',         'bar',
-    'cafe',       'book',        'read',
-    'library',    'more',        'buy'
-    ];
-
+    'movie',
+    'watch',
+    'show',
+    'drama',
+    'Netflix',
+    'Hulu',
+    'Disney',
+    'HBO',
+    'cartoon',
+    'anime',
+    'Crunchyroll',
+    'cable',
+    'restaurant',
+    'dinner',
+    'eat',
+    'takeout',
+    'food',
+    'menu',
+    'dine',
+    'lunch',
+    'brunch',
+    'drink',
+    'tea',
+    'bar',
+    'cafe',
+    'book',
+    'read',
+    'library',
+    'more',
+    'buy'
+  ];
 
   let keyWord = '';
   for (let word of allKeyWords) {
@@ -103,11 +87,38 @@ const insertIntoTasks = function (text, user_id) {
   }
 
   const categoryKeys = {
-    movie: ['movie', 'watch', 'show', 'drama', 'Netflix', 'Hulu', 'Disney', 'HBO', 'cartoon', 'anime', 'Crunchyroll', 'cable'],
-    restaurant: ['restaurant', 'dinner', 'eat', 'takeout', 'food', 'menu', 'dine', 'lunch', 'brunch', 'drink', 'tea', 'bar', 'cafe'],
-    book: ['book', 'read', 'library'],
-    product: ['more', 'buy']
-  }
+    movie: [
+      'movie',
+      'watch',
+      'show',
+      'drama',
+      'Netflix',
+      'Hulu',
+      'Disney',
+      'HBO',
+      'cartoon',
+      'anime',
+      'Crunchyroll',
+      'cable'
+    ],
+    restaurant: [
+      'restaurant',
+      'dinner',
+      'eat',
+      'takeout',
+      'food',
+      'menu',
+      'dine',
+      'lunch',
+      'brunch',
+      'drink',
+      'tea',
+      'bar',
+      'cafe'
+    ],
+    book: [ 'book', 'read', 'library' ],
+    product: [ 'more', 'buy' ]
+  };
 
   let category = '';
   if (categoryKeys['movie'].includes(keyWord)) category = 'movie';
@@ -115,7 +126,13 @@ const insertIntoTasks = function (text, user_id) {
   if (categoryKeys['book'].includes(keyWord)) category = 'book';
   if (categoryKeys['product'].includes(keyWord)) category = 'product';
 
-  return pool.query(`
+  if (!category) {
+    category = 'product';
+  }
+
+  return pool
+    .query(
+      `
     INSERT INTO tasks (
       description,
       category,
@@ -126,12 +143,13 @@ const insertIntoTasks = function (text, user_id) {
       NOW(),
       $3
     )
-  `, [text, category, user_id])
-  .then((result) => result)
-  .catch((err) => console.log('Error:', err.message) );
-}
-exports.insertIntoTasks = insertIntoTasks
-
+  `,
+      [ text, category, user_id ]
+    )
+    .then((result) => result)
+    .catch((err) => console.log('Error:', err.message));
+};
+exports.insertIntoTasks = insertIntoTasks;
 
 const getFinishedTasks = () => {
 
@@ -142,15 +160,32 @@ const getFinishedTasks = () => {
   .then((result) => result)
   .catch((err) => err.message);
 };
-exports.getFinishedTasks = getFinishedTasks
+exports.getFinishedTasks = getFinishedTasks;
 
 const getIncompleteTasks = () => {
 
   console.log('In getIncompleteTasks');
 
   return pool
-  .query(`SELECT id, description FROM tasks WHERE date_finished IS NULL`)
+  .query(`SELECT id, description, category FROM tasks WHERE date_finished IS NULL`)
   .then((result) => result)
   .catch((err) => err.message);
 };
-exports.getIncompleteTasks = getIncompleteTasks
+exports.getIncompleteTasks = getIncompleteTasks;
+
+const makeIncomplete = async (id) => {
+  const result = await pool
+    .query(` UPDATE tasks SET date_finished = NULL WHERE id = $1`, [id])
+    // .then((result) => result)
+    // .catch((err) => console.log('Error:', err.message));
+    return result;
+}
+exports.makeIncomplete = makeIncomplete;
+
+const markCompleted = (id) => {
+  return pool
+    .query(` UPDATE tasks SET date_finished = NOW() WHERE id = $1`, [id])
+    // .then((result) => result)
+    .catch((err) => console.log('Error:', err.message));
+}
+exports.markCompleted = markCompleted;

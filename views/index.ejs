@@ -8,6 +8,8 @@
 
   <!-- External CSS -->
   <link rel="stylesheet" href="./styles/main.css" type="text/css" />
+  <link rel="stylesheet" href="../styles/header.css">
+
   <!-- App CSS -->
 
   <!-- External JS -->
@@ -20,7 +22,7 @@
 
 <body>
   <%- include('partials/_header') %>
-
+  <h2>Tasks</h2>
     <section class="todo-section">
 
       <div>
@@ -34,16 +36,7 @@
       <main class="container">
         <section class="movies-container accordion">
           <div class="movies-header headerBar">Movies</div>
-          <div class="movieTasks listContents">
-
-            <% for (task of tasks) { %>
-              <% if (task.category==='movie' ) {%>
-                <h2>
-                  <%= task.description%>
-                </h2>
-                <% } %>
-                  <% } %>
-          </div>
+          <div class="movieTasks listContents"></div>
         </section>
 
         <section class="restaurants-container accordion">
