@@ -113,7 +113,7 @@ $(document).ready(function() {
     })
       .done((listItems) => {
         console.log('EDITED PROFILE!');
-        fetchTasks();
+        // fetchTasks();
       })
       .fail((err) => {
         console.log('ERROR', err);
