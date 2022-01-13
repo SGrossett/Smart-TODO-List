@@ -103,6 +103,22 @@ $(document).ready(function() {
         console.log('ERROR', err);
       });
   }
+
+  /* -------Edit Profile----------*/
+  const finishTask = function(id) {
+    $.ajax({
+      url: `/user-profile/edit`,
+      method: 'POST',
+      data: { id }
+    })
+      .done((listItems) => {
+        console.log('EDITED PROFILE!');
+        fetchTasks();
+      })
+      .fail((err) => {
+        console.log('ERROR', err);
+      });
+  }
 });
 
 // REMOVE - this is for the old header
