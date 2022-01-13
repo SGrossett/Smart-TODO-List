@@ -9,7 +9,7 @@ $(document).ready(function() {
         method: 'POST',
         data: { task_id: id }
       }).then(() => {
-        window.location.href = 'http://localhost:8080/completed';
+        $(`#task-${id}`).remove();
       });
     }
 
@@ -19,7 +19,7 @@ $(document).ready(function() {
         method: 'POST',
         data: {task_id: id}
       }).then(() => {
-        window.location.href = 'http://localhost:8080/incomplete';
+        $(`#task-${id}`).remove();
       });
   }
   });
@@ -32,5 +32,17 @@ $(document).ready(function() {
   $(`i.edit`).on('click', function() {
     let id = $(this).attr('id');
     $(location).attr('href',`http://localhost:8080/edit-task/${id}`);
-  })
+  });
+
+  $(`i.delete`).on('click', function() {
+    let id = $(this).attr('id');
+
+    $.ajax({
+      url: `/delete/${id}`,
+      method: 'POST',
+    }).then(() => {
+      $(`#task-${id}`).remove();
+      // window.location.href = 'http://localhost:8080/incomplete';
+    });
+  });
 });
