@@ -1,0 +1,50 @@
+body {
+  font-family: "Arial", "Helvetica", sans-serif;
+  background-color: #fcfcfc;
+}
+.temp-title {
+  /* background-color: chartreuse; */
+  display: flex;
+  justify-content: center;
+}
+.main-body{
+  /* border: 2px solid black; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 10%;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+.user-stats {
+  padding: 2%;
+  display: flex;
+  margin-top: 1%;
+  border-radius: 5px;
+  background-color: white;
+  border: 1px solid lightgrey;
+}
+/* .form-section {
+  border: 2px solid red;
+  display: flex;
+  justify-content: space-between;
+} */
+#editEmailForm {
+  /* background-color: seagreen; */
+  /* border: 2px solid red; */
+  margin-top: 5%;
+  display: flex;
+  justify-content: space-between;
+}
+#editEmailFormText {
+  width: 85%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+}
+#editEmailSubmit {
+  border-radius: 35vw;
+  border: none;
+  width: 33px;
+  margin-left: 1vw;
+}
