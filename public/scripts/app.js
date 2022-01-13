@@ -111,7 +111,6 @@ $(document).ready(function() {
       console.log('submitting edit');
     });
 
-
     $.ajax({
       url: `/edit-user`,
       method: 'POST',
@@ -125,6 +124,7 @@ $(document).ready(function() {
         console.log('ERROR', err);
       });
   }
+
 });
 
 // REMOVE - this is for the old header
