@@ -138,8 +138,8 @@ app.get('/user-profile/edit', (req, res) => {
   res.render('profile');
 });
 app.post('/user-profile/edit', (req, res) => {
-  console.log(req.body.id);
-  database.updateEmail(req.body.id).then((result) => {
+  console.log(req.body.email);
+  database.updateEmail(req.body.email).then((result) => {
     console.log(result);
     res.send();
   });

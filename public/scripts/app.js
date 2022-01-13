@@ -105,7 +105,14 @@ $(document).ready(function() {
   }
 
   /* -------Edit Profile----------*/
-  const finishTask = function(id) {
+  const editEmail = function(id) {
+
+    $(`#editEmailSubmit`).click(function(event) {
+      event.preventDefault();
+      console.log('submitting edit');
+    });
+
+
     $.ajax({
       url: `/user-profile/edit`,
       method: 'POST',

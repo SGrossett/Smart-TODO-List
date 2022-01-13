@@ -96,7 +96,7 @@ exports.addDateFinished = addDateFinished;
 
 /* -------Edit Profile----------*/
 // NEW edit function - UPDATE email from users
-const updateEmail = function(id, newEmail) {
+const updateEmail = function(id, email) {
   return pool
     .query(`
       UPDATE users
