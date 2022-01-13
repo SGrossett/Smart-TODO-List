@@ -1,10 +1,10 @@
 const axios = require('axios').default;
+const cookieParser = require('cookie-parser')
 
 // load .env data into process.env
 const fake_data = require('./routes/fakedata');
 require('dotenv').config();
 const bodyParser = require('body-parser');
-const cookieSession = require('cookie-session');
 
 const database = require('./routes/database');
 
@@ -22,14 +22,8 @@ const db = new Pool(dbParams);
 db.connect();
 
 // MIDDLEWARE
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(
-  cookieSession({
-    name: 'session',
-    keys: [ 'superUltraSpecialSecretKey' ],
-    user_id: undefined
-  })
-);
 
 app.use(morgan('dev'));
 
@@ -61,11 +55,6 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-app.get('/cookie_user_id', (req, res) => {
-  const user_id = req.session.user_id;
-  res.json(user_id);
-});
-
 // for logout
 app.post('/logout', (req, res) => {
   res.render('index');
@@ -79,7 +68,7 @@ app.post('/login', (req, res) => {
   let { email } = req.body;
 
   database.getIdFromEmail(email).then((user_id) => {
-    req.session.user_id = user_id;
+    res.cookie('user_id', user_id);
     res.redirect('/');
   });
 });
@@ -91,7 +80,7 @@ app.get('/register', (req, res) => {
 app.post('/register', (req, res) => {
   let { email } = req.body;
   database.addUserWithEmail(email).then((user_id) => {
-    req.session.user_id = user_id;
+    res.cookie('user_id', user_id);
     res.redirect('/');
   });
 });
@@ -127,17 +116,6 @@ app.post('/updateToFinished', (req, res) => {
   });
 });
 // --- API ROUTES -------------------------------------------------------------
-
-app.post('/user-tasks', (req, res) => {
-  let user_id = req.session.user_id;
-  const body = req.body;
-  console.log('adding user tasks');
-
-  database.insertIntoTasks(body.text, user_id).then((result) => {
-    // console.log(result);
-    res.send();
-  });
-});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

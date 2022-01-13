@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const categoryAssigner = require('./tools/catAssign');
 
 module.exports = (db) => {
   router.get('/', (req, res) => {
@@ -10,6 +11,37 @@ module.exports = (db) => {
       .then((data) => {
         const tasks = data.rows;
         res.json(tasks);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  router.post('/', (req, res) => {
+    const text = req.body.text;
+    const user_id = req.cookies.user_id;
+
+    const category = categoryAssigner(text);
+
+    db
+      .query(
+        `
+    INSERT INTO tasks (
+      description,
+      category,
+      date_created, user_id
+    ) VALUES (
+      $1,
+      $2,
+      NOW(),
+      $3
+    )
+  `,
+        [ text, category, user_id ]
+      )
+      .then((data) => {
+        const tasks = data.rows;
+        res.send();
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
