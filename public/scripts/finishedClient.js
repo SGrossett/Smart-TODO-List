@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
   // const createTaskMarkup = function(taskObj) {
   //   const $task = $(
   //     `<label class="form-control">
@@ -39,28 +38,26 @@ $(document).ready(function() {
     url: `/completed`,
     method: 'GET',
     success: (tasks) => {
-
-      console.log(tasks)
+      console.log(tasks);
     },
     error: (err) => console.log(`Error: ${err}`)
   });
 
-
-  $('input[type="checkbox"]').on('click', function(){
+  $('input[type="checkbox"]').on('click', function() {
     let id = $(this).attr('id');
-    if($(this).is(":checked")){
-        console.log(id);
-        console.log(` ${id} checkbox is checked.`);
-    }
-    else if($(this).is(":not(:checked)")) {
-        console.log($(this))
-        $.ajax({
-          url: `/updateToIncomplete`,
-          method: 'POST',
-          data: {task_id: id}
-        })
+    if ($(this).is(':checked')) {
+      console.log(id);
+      console.log(` ${id} checkbox is checked.`);
+    } else if ($(this).is(':not(:checked)')) {
+      console.log($(this));
+      $.ajax({
+        url: `/updateToIncomplete`,
+        method: 'POST',
+        data: { task_id: id }
+      }).then(() => {
+        window.location.href = 'http://localhost:8080/completed';
         console.log(`${id} is unchecked`);
+      });
     }
-
   });
 });

@@ -52,12 +52,17 @@ app.use('/api/tasks', tasksRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  res.render('index');
+  const user_id = req.cookies.user_id;
+  if (user_id) {
+    res.render('index');
+  } else {
+    res.redirect('/login');
+  }
 });
 
-// for logout
 app.post('/logout', (req, res) => {
-  res.render('index');
+  res.clearCookie('user_id');
+  res.redirect('/');
 });
 
 app.get('/login', (req, res) => {
@@ -95,43 +100,68 @@ app.get('/tasks/:task_id', (req, res) => {
 });
 
 app.get('/completed', (req, res) => {
-  database.getFinishedTasks()
-  .then((task) => {
-    res.render('complete', {tasks: task.rows});
-  });
+  const user_id = req.cookies.user_id;
+  if (user_id) {
+    database.getFinishedTasks(user_id).then((task) => {
+      res.render('complete', { tasks: task.rows });
+    });
+  } else {
+    res.redirect('/login');
+  }
 });
 
 app.get('/incomplete', (req, res) => {
   console.log('in /incomplete');
-  database.getIncompleteTasks()
-  .then((task) => {
-    res.render('incomplete', {tasks: task.rows});
-  });
+  const user_id = req.cookies.user_id;
+  if (user_id) {
+    database.getIncompleteTasks(user_id).then((tasks) => {
+      res.render('incomplete', { tasks: tasks.rows });
+    });
+  } else {
+    res.redirect('/login');
+  }
 });
 
 app.post('/updateToIncomplete', (req, res) => {
-  console.log('going to update')
-  let id  = req.body.task_id;
-  database.makeIncomplete(id)
+  console.log('going to update');
+  let id = req.body.task_id;
+  database.makeIncomplete(id);
   res.redirect('/completed');
 });
 
 app.post('/updateToFinished', (req, res) => {
-  let id  = req.body.task_id;
-  database.markCompleted(id)
-  .then((result) => {
-    res.redirect('/completed')
+  let id = req.body.task_id;
+  database.markCompleted(id).then((result) => {
+    res.redirect('/completed');
     return result;
   });
 });
-// --- API ROUTES -------------------------------------------------------------
-app.post('/user-tasks/delete', (req, res) => {
+
+app.get('/edit-task/:id', (req, res) => {
+  const id = req.params.id;
+  res.send(id); // todo replace with res.render('edit-task') when html complete
+});
+
+app.post('/edit-task/:id', (req, res) => {
+  const id = req.params.id;
+  const { task, category } = req.body;
+  database
+    .updateTask(task, category, id)
+    .then(() => {
+      res.redirect('/');
+    })
+    .catch((err) => {
+      res.send(err.message);
+    });
+});
+
+app.post('/user-tasks/complete-task', (req, res) => {
   console.log(req.body.id);
   database.addDateFinished(req.body.id).then((result) => {
     console.log(result);
     res.send();
   });
-})
+});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
