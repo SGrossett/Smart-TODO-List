@@ -32,10 +32,10 @@ $(document).ready(function() {
     <div>
       <span class="listItem">
         <i class="far fa-square icon" id="completeTask${item.id}"></i>
-        <a href="http://localhost:8080/edit-task/${item.id}">
-        <i class="fas fa-pen icon" id="editTask${item.id}"></i>
-        </a>
         ${item.description}
+        <a href="http://localhost:8080/edit-task/${item.id}">
+        <i class="far fa-edit icon" id="editTask${item.id}"></i>
+        </a>
       </span>
       </div>`;
   };
