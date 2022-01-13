@@ -138,7 +138,7 @@ const updateUser = function(email, id) {
       `
       UPDATE users
       SET
-      email = $1,
+      email = $1
       WHERE id = $2
       `,
       [ email, id ]
