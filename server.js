@@ -125,6 +125,13 @@ app.post('/updateToFinished', (req, res) => {
   });
 });
 // --- API ROUTES -------------------------------------------------------------
+app.post('/user-tasks/delete', (req, res) => {
+  console.log(req.body.id);
+  database.addDateFinished(req.body.id).then((result) => {
+    console.log(result);
+    res.send();
+  });
+})
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

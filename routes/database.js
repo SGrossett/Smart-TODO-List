@@ -77,3 +77,19 @@ const markCompleted = (id) => {
   );
 };
 exports.markCompleted = markCompleted;
+exports.insertIntoTasks = insertIntoTasks;
+
+// NEW delete function - ADD end date to db
+const addDateFinished = function(id) {
+  return pool
+    .query(`
+      UPDATE tasks
+      SET date_finished = NOW()
+      WHERE id = $1
+      `,
+      [ id ]
+    )
+    .then((result) => result)
+    .catch((err) => console.log('Error:', err.message));
+};
+exports.addDateFinished = addDateFinished;
