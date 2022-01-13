@@ -27,16 +27,19 @@ $(document).ready(function() {
       });
   });
 
-
   const createMarkup = function(item, selectorID) {
     return `
     <div>
       <span class="listItem">
-        <button id="${selectorID}">X</button>
+        <i class="far fa-square icon" id="completeTask${item.id}"></i>
+        <a href="http://localhost:8080/edit-task/${item.id}">
+        <i class="fas fa-pen icon" id="editTask${item.id}"></i>
+        </a>
         ${item.description}
       </span>
-    </div>`;
+      </div>`;
   };
+  // <button id="completeTask${selectorID}">X</button>
 
   const fetchTasks = function() {
     $.ajax({
@@ -46,7 +49,7 @@ $(document).ready(function() {
       $('.listContents').empty();
       console.log(listItems);
       listItems.map((item) => {
-        const selectorID = `list-item-${item.id}`
+        const selectorID = `list-item-${item.id}`;
         // add item to movies
         if (item.category === 'movie') {
           $('.movieTasks').prepend(createMarkup(item, selectorID));
@@ -63,7 +66,7 @@ $(document).ready(function() {
         if (item.category === 'product') {
           $('.productTasks').prepend(createMarkup(item, selectorID));
         }
-        $(`#${selectorID}`).click(function(event) {
+        $(`#completeTask${item.id}`).click(function(event) {
           event.preventDefault();
           console.log('submitting form');
           finishTask(item.id);
@@ -72,8 +75,6 @@ $(document).ready(function() {
     });
   };
 
-
-
   /* ------------Accordion-----------*/
   $('.accordion').accordion({
     collapsible: true,
@@ -81,17 +82,15 @@ $(document).ready(function() {
   });
   $('.accordion').accordion('refresh');
 
-  fetchTasks();
   /* ------User verification--------*/
 
   fetchTasks();
 
   /* --------Removing Items----------*/
 
-
   const finishTask = function(id) {
     $.ajax({
-      url: `/user-tasks/delete`,
+      url: `/user-tasks/complete-task`,
       method: 'POST',
       data: { id }
     })

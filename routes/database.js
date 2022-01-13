@@ -40,21 +40,24 @@ const addUserWithEmail = function(email) {
 };
 exports.addUserWithEmail = addUserWithEmail;
 
-const getFinishedTasks = () => {
+const getFinishedTasks = (user_id) => {
   console.log('In getFinishedTasks');
 
   return pool
-    .query(`SELECT id, description, category FROM tasks WHERE date_finished IS NOT NULL ORDER BY date_finished DESC`)
+    .query(
+      `SELECT id, description, category FROM tasks WHERE user_id = $1 AND date_finished IS NOT NULL ORDER BY date_finished DESC`,
+      [ user_id ]
+    )
     .then((result) => result)
     .catch((err) => err.message);
 };
 exports.getFinishedTasks = getFinishedTasks;
 
-const getIncompleteTasks = () => {
+const getIncompleteTasks = (user_id) => {
   console.log('In getIncompleteTasks');
 
   return pool
-    .query(`SELECT id, description, category FROM tasks WHERE date_finished IS NULL`)
+    .query(`SELECT id, description, category FROM tasks WHERE user_id = $1 AND date_finished IS NULL`, [ user_id ])
     .then((result) => result)
     .catch((err) => err.message);
 };
@@ -82,7 +85,8 @@ exports.markCompleted = markCompleted;
 // NEW delete function - ADD end date to db
 const addDateFinished = function(id) {
   return pool
-    .query(`
+    .query(
+      `
       UPDATE tasks
       SET date_finished = NOW()
       WHERE id = $1
@@ -109,3 +113,68 @@ const updateEmail = function(id, email) {
     .catch((err) => console.log('Error:', err.message));
 };
 exports.updateEmail = updateEmail;
+
+const updateTask = function(task, category, id) {
+  return pool
+    .query(
+      `
+      UPDATE tasks
+      SET
+      task = $1,
+      category = $2,
+      WHERE id = $3
+      `,
+      [ task, category, id ]
+    )
+    .then((result) => result)
+    .catch((err) => console.log('Error:', err.message));
+};
+exports.updateTask = updateTask;
+
+const updateUser = function(email, id) {
+  return pool
+    .query(
+      `
+      UPDATE users
+      SET
+      email = $1,
+      WHERE id = $2
+      `,
+      [ email, id ]
+    )
+    .then((result) => result)
+    .catch((err) => console.log('Error:', err.message));
+};
+exports.updateUser = updateUser;
+
+const getTaskFromId = function(task_id) {
+  return pool
+    .query(
+      `
+      SELECT *
+      FROM tasks
+      WHERE id = $1
+      `,
+      [ task_id ]
+    )
+    .then((task) => {
+      return task.rows[0];
+    })
+    .catch((err) => console.log('Error:', err.message));
+};
+exports.getTaskFromId = getTaskFromId;
+
+const getEmailFromId = function(user_id) {
+  return pool
+    .query(
+      `
+      SELECT email
+      FROM users
+      WHERE id = $1
+      `,
+      [ user_id ]
+    )
+    .then((email) => email.rows[0].email)
+    .catch((err) => console.log('Error:', err.message));
+};
+exports.getEmailFromId = getEmailFromId;

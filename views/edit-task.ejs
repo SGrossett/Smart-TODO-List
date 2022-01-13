@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Meta Information -->
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+    <title>Smart-TODO-List - Home Page</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+
+    <!-- App CSS -->
+    <link rel="stylesheet" href="../styles/header.css">
+
+    <!-- External JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- App JS -->
+
+  </head>
+
+  <body>
+    <!-- Top nav bar (fixed) -->
+    <%- include('partials/_header') %>
+    <h2>Edit Task</h2>
+
+    <!-- Page-specific (main) content here -->
+    <main class="container">
+      <form action="">
+        <label for="task">Task</label>
+        <textarea name="task" rows="5" cols="30"></textarea><br>
+        <label for="category">Category</label>
+        <input type="radio" id="" name="movie" value="Movies">
+        <label for="movie">Movies</label><br>
+        <input type="radio" id="" name="restaurant" value="Restaurants">
+        <label for="movie">Restaurants</label><br>
+        <input type="radio" id="" name="book" value="Books">
+        <label for="movie">Books</label><br>
+        <input type="radio" id="" name="product" value="Products">
+        <label for="movie">Products</label><br>
+        <input type="radio" id="" name="other" value="Other">
+        <label for="movie">Other</label><br>
+      </form>
+    </main>
+  </body>
+</html>

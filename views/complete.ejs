@@ -6,18 +6,14 @@
     <title>Smart-TODO-List - Home Page</title>
 
     <!-- External CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 
     <!-- App CSS -->
-    <link rel="stylesheet" href="../styles/complete.css">
+    <link rel="stylesheet" href="../styles/viewTasks.css">
     <link rel="stylesheet" href="../styles/header.css">
-
 
     <!-- External JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
     <!-- App JS -->
     <script type="text/javascript" src="/scripts/finishedClient.js"></script>
@@ -26,24 +22,8 @@
 
   <body>
     <!-- Top nav bar (fixed) -->
-
+    <%- include('partials/_header') %>
     <h2>Completed</h2>
-
-
-    <input type="checkbox" id="active" class="active-checkbox">
-    <label for="active" class="menu-btn"><span></span></label>
-    <label for="active" class="close"></label>
-    <div class="wrapper">
-      <h2>Smart-TODO-List</h2>
-      <ul>
-        <li><a href="#"><i class="user-icon fas fa-sun"></i>User Name</a></li>
-        <li><a href="/"><i class="tasks-icon fas fa-tasks"></i>Tasks</a></li>
-        <li><a href="#"><i class="important-icon far fa-star"></i>Important</a></li>
-        <li><a href="/completed"><i class="completed-icon fas fa-check-circle"></i>Completed</a></li>
-        <li><a href="/logout"><i class="logout-icon fas fa-sign-out-alt"></i>Logout</a></li>
-      </ul>
-    </div>
-
 
     <!-- Page-specific (main) content here -->
     <main class="container">
@@ -51,7 +31,12 @@
         <% for (task of tasks) { %>
           <div class="form-control">
             <input type="checkbox" class="checkbox incomplete" id="<%= task.id %>" name="<%= task.category %>" value="<%= task.description %>" checked>
-            <%= task.description %>
+            <div id="description-text"><%= task.description %></div>
+
+            <div class='edit-delete'>
+              <button class="icon"><i class="edit far fa-edit"></i></button>
+              <button class="icon"><i class="delete far fa-trash-alt"></i></button>
+            </div>
           </div>
               <% } %>
 

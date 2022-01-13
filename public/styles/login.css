@@ -26,7 +26,7 @@ h2:before,
 h2:after {
   content: "";
   height: 3px;
-  width: 27%;
+  width: 10%;
   background: #d4d4d4;
   position: absolute;
   top: 13%;
