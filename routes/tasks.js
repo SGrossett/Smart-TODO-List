@@ -26,7 +26,7 @@ module.exports = (db) => {
     if (!category) {
       categoryAssignerApi(text)
         .then((catInfo) => {
-          if (catInfo) {
+          if (catInfo.length > 0) {
             category = catInfo[0];
           } else {
             // default category is product

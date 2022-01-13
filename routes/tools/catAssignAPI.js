@@ -82,7 +82,11 @@ const catAssignerAPI = function(taskDescription) {
   const movieProm = checkMovies(taskDescription);
   const bookProm = checkBooks(taskDescription);
 
-  return Promise.all([ restaurantProm, movieProm, bookProm ])
+  return Promise.all([
+    movieProm,
+    bookProm,
+    restaurantProm
+  ])
     .then((arr) => {
       console.log('category Assigner API complete')
       return arr.filter((catObj) => Object.values(catObj)[0]).map((catObj) => Object.keys(catObj)[0]);
