@@ -132,6 +132,14 @@ li:nth-child(5) {
   margin: 0px 1.2em;
   padding-bottom: 3.5em;
 }
+a button {
+  display: flex;
+  margin: 1em auto;
+  background-color: #2e3c50;
+  border: none;
+  font-size: 17px;
+  color: white;
+}
 
 
 @media (max-width: 952px){
