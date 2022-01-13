@@ -61,7 +61,7 @@ module.exports = (db) => {
 
   router.get('/task-from-user/:id', (req, res) => {
     const id = req.params.id;
-    let query = `SELECT * FROM tasks WHERE user_id = $1`;
+    let query = `SELECT * FROM tasks WHERE user_id = $1 AND date_finished IS NULL`;
     db
       .query(query, [ id ])
       .then((data) => {
@@ -72,5 +72,7 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
+
+  // router.get('/user-tasks')
   return router;
 };
