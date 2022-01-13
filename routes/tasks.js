@@ -26,22 +26,36 @@ module.exports = (db) => {
     db
       .query(
         `
-    INSERT INTO tasks (
-      description,
-      category,
-      date_created, user_id
-    ) VALUES (
-      $1,
-      $2,
-      NOW(),
-      $3
-    )
-  `,
+      INSERT INTO tasks (
+        description,
+        category,
+        date_created, user_id
+        ) VALUES (
+          $1,
+          $2,
+          NOW(),
+          $3
+          )
+          `,
         [ text, category, user_id ]
       )
       .then((data) => {
         const tasks = data.rows;
         res.send();
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  router.get('/:task_id', (req, res) => {
+    const task_id = req.params.task_id
+    let query = `SELECT * FROM tasks WHERE id = $1`;
+    db
+      .query(query, [task_id])
+      .then((data) => {
+        const task = data.rows;
+        res.json(task);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });

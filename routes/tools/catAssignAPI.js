@@ -17,7 +17,7 @@ const axios = require('axios').default;
 //   .then((res) => {
 //     console.log(res.data.businesses);
 //   })
-  // .catch((err) => console.log(err.message));
+// .catch((err) => console.log(err.message));
 
 // axios({
 //   method: 'get',
@@ -32,5 +32,6 @@ const axios = require('axios').default;
 //   })
 //   .catch((err) => console.log(err.message));
 
-
 // FANDANGO_API_KEY = '8rty8p63wuwmw89nmdgd8g2w';
+
+//https://developers.google.com/books/docs/v1/using

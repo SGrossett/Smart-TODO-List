@@ -1,5 +1,5 @@
 const axios = require('axios').default;
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
 
 // load .env data into process.env
 const fake_data = require('./routes/fakedata');
@@ -83,6 +83,15 @@ app.post('/register', (req, res) => {
     res.cookie('user_id', user_id);
     res.redirect('/');
   });
+});
+
+app.get('/tasks/:task_id', (req, res) => {
+  const task_id = req.params.task_id;
+  axios(`http://localhost:8080/api/tasks/${task_id}`)
+    .then((task) => {
+      res.send({ task });
+    })
+    .catch((err) => console.log('ERROR,', err.message));
 });
 
 // --- API ROUTES -------------------------------------------------------------
