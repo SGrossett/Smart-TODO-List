@@ -161,8 +161,6 @@ app.post('/edit-task/:task_id', (req, res) => {
 });
 
 app.get('/edit-user', (req, res) => {
-  console.log('in profile');
-  // res.render('profile');
 
   const user_id = req.cookies.user_id;
 
@@ -170,7 +168,6 @@ app.get('/edit-user', (req, res) => {
     database
       .getEmailFromId(user_id)
       .then((email) => {
-        console.log({user_id, email})
         res.render('profile', { user_id, email });
       })
       .catch((err) => console.log(err));
@@ -179,26 +176,15 @@ app.get('/edit-user', (req, res) => {
   }
 });
 
-// app.post('/edit-user', (req, res) => {
-//   console.log('email edit starting');
+app.post('/edit-user', (req, res) => {
+  let user_id = req.cookies.user_id;
+  let email = req.body.email;
 
-//   const user_id = req.cookies.user_id;
-//   if (user_id) {
-//     const email = req.body;
-//     database
-//       .updateUser(email, user_id) // <-----------------EDIT HERE------------
-//       .then(() => {
-//         // console.log(email);
-//         // console.log(user_id);
-//         res.redirect('/');
-//       })
-//       .catch((err) => {
-//         res.send(err.message);
-//       });
-//   } else {
-//     res.redirect('/login');
-//   }
-// });
+  database.updateUser(email, user_id).then((result) => {
+    res.redirect('/');
+    return result;
+  })
+})
 
 app.post('/user-tasks/complete-task', (req, res) => {
   // console.log(req.body.id);
@@ -207,22 +193,6 @@ app.post('/user-tasks/complete-task', (req, res) => {
     res.send();
   });
 })
-
-// /* -------Edit Profile----------*/
-/*
-// EDIT GET REQ TO RENDER PAGE
-app.get('/edit-user', (req, res) => {
-  res.render('profile');
-  console.log('in profile');
-});
-app.post('/edit-user', (req, res) => {
-  console.log(req.body.email);
-  database.updateUser(req.body.email).then((result) => {
-    console.log(result);
-    res.send();
-  });
-});
-*/
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
