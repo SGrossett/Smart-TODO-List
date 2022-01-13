@@ -28,7 +28,6 @@ $(document).ready(function() {
     $(`.container`).toggle(600);
   });
 
-
   $(`i.edit`).on('click', function() {
     let id = $(this).attr('id');
     $(location).attr('href',`http://localhost:8080/edit-task/${id}`);
@@ -42,7 +41,6 @@ $(document).ready(function() {
       method: 'POST',
     }).then(() => {
       $(`#task-${id}`).remove();
-      // window.location.href = 'http://localhost:8080/incomplete';
     });
   });
 });
