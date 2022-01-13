@@ -47,7 +47,7 @@ $(document).ready(function() {
       method: 'GET'
     }).done((listItems) => {
       $('.listContents').empty();
-      console.log(listItems);
+      // console.log(listItems);
       listItems.map((item) => {
         const selectorID = `list-item-${item.id}`;
         // add item to movies
@@ -113,7 +113,7 @@ $(document).ready(function() {
 
 
     $.ajax({
-      url: `/user-profile/edit`,
+      url: `/edit-user`,
       method: 'POST',
       data: { id }
     })
