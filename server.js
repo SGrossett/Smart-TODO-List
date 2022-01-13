@@ -161,6 +161,9 @@ app.post('/edit-task/:task_id', (req, res) => {
 });
 
 app.get('/edit-user', (req, res) => {
+  console.log('in profile');
+  res.render('profile');
+
   const user_id = req.cookies.user_id;
 
   if (user_id) {
@@ -176,6 +179,7 @@ app.get('/edit-user', (req, res) => {
 });
 
 app.post('/edit-user', (req, res) => {
+
   const user_id = req.cookies.user_id;
   if (user_id) {
     const { email } = req.body;
@@ -199,18 +203,18 @@ app.post('/user-tasks/complete-task', (req, res) => {
     res.send();
   });
 })
-/* -------Edit Profile----------*/
-// EDIT GET REQ TO RENDER PAGE
-app.get('/user-profile/edit', (req, res) => {
-  res.render('profile');
-});
-app.post('/user-profile/edit', (req, res) => {
-  console.log(req.body.email);
-  database.updateEmail(req.body.email).then((result) => {
-    console.log(result);
-    res.send();
-  });
-})
+// /* -------Edit Profile----------*/
+// // EDIT GET REQ TO RENDER PAGE
+// app.get('/edit-user', (req, res) => {
+//   res.render('profile');
+//   console.log('in profile');
+// });
+// app.post('/edit-user', (req, res) => {
+//   console.log(req.body.email);
+//   database.updateUser(req.body.email).then((result) => {
+//     console.log(result);
+//     res.send();
+//   });
 // });
 
 app.listen(PORT, () => {

@@ -98,21 +98,22 @@ const addDateFinished = function(id) {
 };
 exports.addDateFinished = addDateFinished;
 
-/* -------Edit Profile----------*/
-// NEW edit function - UPDATE email from users
-const updateEmail = function(id, email) {
-  return pool
-    .query(`
-      UPDATE users
-      SET email = $2
-      WHERE id = $1
-      `,
-      [ id, email ] // CHECK IF EMAIL BEING CALLED CORRECTLY
-    )
-    .then((result) => result)
-    .catch((err) => console.log('Error:', err.message));
-};
-exports.updateEmail = updateEmail;
+
+// // NEW edit function - UPDATE email from users
+// const updateEmail = function(id, email) {
+//   return pool
+//     .query(`
+//       UPDATE users
+//       SET email = $2
+//       WHERE id = $1
+//       `,
+//       [ id, email ] // CHECK IF EMAIL BEING CALLED CORRECTLY
+//     )
+//     .then((result) => result)
+//     .catch((err) => console.log('Error:', err.message));
+// };
+// exports.updateEmail = updateEmail;
+
 
 const updateTask = function(task, category, id) {
   return pool
