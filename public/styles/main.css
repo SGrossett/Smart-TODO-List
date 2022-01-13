@@ -80,12 +80,18 @@ body {
 }
 
 .listItem {
-  margin: 1.5%;
-  padding: 2%;
+  padding: 5px;
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   background-color: white;
   border-radius: 5px;
+}
+.listItem .icon {
+  margin: 10px;
+  text-decoration: none;
+  /* remove underline */
+  color: black;
 }
 
 #list-delete {

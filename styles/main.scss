@@ -60,19 +60,18 @@ body {
   justify-content: space-between;
   margin-bottom: 8%;
 }
-#task-text{
+#task-text {
   width: 85%;
   padding: 8px;
   border-radius: 5px;
   border: 1px solid lightgrey;
 }
-#form-submit{
+#form-submit {
   border-radius: 35vw;
   border: none;
   width: 33px;
   margin-left: 1vw;
 }
-
 
 // body
 // collapseable category header
@@ -91,15 +90,23 @@ body {
 // individual list items ✅
 .listItem {
   // position
-  margin: 1.5%;
-  padding: 2%;
+  // margin: 1.5%;
+  padding: 5px;
   display: flex;
   justify-content: flex-start;
+  align-items: center;
 
   // styling
   background-color: white;
   border-radius: 5px;
+
+  .icon {
+    margin: 10px;
+    text-decoration: none; /* remove underline */
+    color: black;
+  }
 }
+
 // delete button
 #list-delete {
   border-radius: 35vw;
@@ -114,7 +121,6 @@ body {
   overflow-y: scroll;
   padding-left: 3%;
 }
-
 
 // scrollbar
 // default
@@ -131,4 +137,3 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-

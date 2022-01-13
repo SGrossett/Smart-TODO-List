@@ -10,9 +10,9 @@ $(document).ready(function() {
   console.log('jquery loaded');
   const user_id = getUserId();
 
+  /* ------Adding Items--------------*/
   $('#form1').submit(function(event) {
     event.preventDefault();
-    console.log('submitting form');
 
     $.ajax({
       url: `/api/tasks`,
@@ -20,7 +20,6 @@ $(document).ready(function() {
       data: $(this).serialize()
     })
       .done((listItems) => {
-        console.log('TASK ADDED!');
         fetchTasks();
       })
       .fail((err) => {
@@ -28,9 +27,19 @@ $(document).ready(function() {
       });
   });
 
-  const createMarkup = function(data) {
-    return `<div><span class="listItem"><input type="checkbox" id="list-delete"></input>${data.description}</span></div>`;
+  const createMarkup = function(item, selectorID) {
+    return `
+    <div>
+      <span class="listItem">
+        <i class="far fa-square icon" id="completeTask${item.id}"></i>
+        <a href="http://localhost:8080/edit-task/${item.id}">
+        <i class="fas fa-pen icon" id="editTask${item.id}"></i>
+        </a>
+        ${item.description}
+      </span>
+      </div>`;
   };
+  // <button id="completeTask${selectorID}">X</button>
 
   const fetchTasks = function() {
     $.ajax({
@@ -40,35 +49,62 @@ $(document).ready(function() {
       $('.listContents').empty();
       console.log(listItems);
       listItems.map((item) => {
+        const selectorID = `list-item-${item.id}`;
         // add item to movies
         if (item.category === 'movie') {
-          $('.movieTasks').prepend(createMarkup(item));
+          $('.movieTasks').prepend(createMarkup(item, selectorID));
         }
         // add item to restaurants
         if (item.category === 'restaurant') {
-          $('.restaurantTasks').prepend(createMarkup(item));
+          $('.restaurantTasks').prepend(createMarkup(item, selectorID));
         }
         // add item to books
         if (item.category === 'book') {
-          $('.bookTasks').prepend(createMarkup(item));
+          $('.bookTasks').prepend(createMarkup(item, selectorID));
         }
         // add item to products
         if (item.category === 'product') {
-          $('.productTasks').prepend(createMarkup(item));
+          $('.productTasks').prepend(createMarkup(item, selectorID));
         }
+        $(`#completeTask${item.id}`).click(function(event) {
+          event.preventDefault();
+          console.log('submitting form');
+          finishTask(item.id);
+        });
       });
     });
   };
 
+  /* ------------Accordion-----------*/
   $('.accordion').accordion({
     collapsible: true,
     active: false
   });
   $('.accordion').accordion('refresh');
 
+  /* ------User verification--------*/
+
   fetchTasks();
+
+  /* --------Removing Items----------*/
+
+  const finishTask = function(id) {
+    $.ajax({
+      url: `/user-tasks/complete-task`,
+      method: 'POST',
+      data: { id }
+    })
+      .done((listItems) => {
+        console.log('TASK REMOVED!');
+        fetchTasks();
+      })
+      .fail((err) => {
+        console.log('ERROR', err);
+      });
+  };
 });
 
+// REMOVE - this is for the old header
 // used in _header partial
 function navbarToggle() {
   var x = document.getElementById('menu-links');
