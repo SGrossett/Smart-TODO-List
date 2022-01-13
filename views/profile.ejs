@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Smart-TODO-List</title>
+    <!-- SCRIPTS -->
+    <link rel="stylesheet" href="./styles/profile.css" type="text/css" />
+  </head>
+
+  <body>
+    <!-- <%- include('partials/_header') %> -->
+
+    <h2 class="temp-title">Profile Editor</h2>
+
+    <section class="main-body">
+      <div class="user-stats">
+        CURRENT EMAIL:
+        <%= email %>
+
+        <br>
+        CURRENT ID:
+        <%= user_id %>
+
+      </div>
+
+      <form action="/edit-user" method="POST" id="editEmailForm">
+        <i>
+          New email:
+        </i>
+
+        <input type="text" id="editEmailFormText" value="<%= email %>" name="email"></input>
+        <button type="submit" id="editEmailSubmit">+</button>
+      </form>
+
+    </section>
+
+
+
+  </body>
+  <%- include('partials/_footer') %>
+</html>

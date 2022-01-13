@@ -101,8 +101,6 @@ body {
 }
 
 .listContents {
-  height: 15vh;
-  overflow-y: scroll;
   padding-left: 3%;
 }
 

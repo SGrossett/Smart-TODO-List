@@ -47,7 +47,7 @@ $(document).ready(function() {
       method: 'GET'
     }).done((listItems) => {
       $('.listContents').empty();
-      console.log(listItems);
+      // console.log(listItems);
       listItems.map((item) => {
         const selectorID = `list-item-${item.id}`;
         // add item to movies
@@ -78,7 +78,8 @@ $(document).ready(function() {
   /* ------------Accordion-----------*/
   $('.accordion').accordion({
     collapsible: true,
-    active: false
+    active: false,
+    heightStyle: "content"
   });
   $('.accordion').accordion('refresh');
 
@@ -101,7 +102,30 @@ $(document).ready(function() {
       .fail((err) => {
         console.log('ERROR', err);
       });
-  };
+  }
+
+  /* -------Edit Profile----------*/
+  const editEmail = function(id) {
+
+    $(`#editEmailSubmit`).click(function(event) {
+      event.preventDefault();
+      console.log('submitting edit');
+    });
+
+    $.ajax({
+      url: `/edit-user`,
+      method: 'POST',
+      data: { id }
+    })
+      .done((listItems) => {
+        console.log('EDITED PROFILE!');
+        // fetchTasks();
+      })
+      .fail((err) => {
+        console.log('ERROR', err);
+      });
+  }
+
 });
 
 // REMOVE - this is for the old header

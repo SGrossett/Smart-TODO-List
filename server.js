@@ -173,13 +173,14 @@ app.post('/delete/:task_id', (req, res) => {
 })
 
 app.get('/edit-user', (req, res) => {
+
   const user_id = req.cookies.user_id;
 
   if (user_id) {
     database
       .getEmailFromId(user_id)
       .then((email) => {
-        res.send({ user_id, email }); // todo replace with res.render('edit-user', {user_id, email}) when html complete
+        res.render('profile', { user_id, email });
       })
       .catch((err) => console.log(err));
   } else {
@@ -188,29 +189,22 @@ app.get('/edit-user', (req, res) => {
 });
 
 app.post('/edit-user', (req, res) => {
-  const user_id = req.cookies.user_id;
-  if (user_id) {
-    const { email } = req.body;
-    database
-      .updateUser(email, id)
-      .then(() => {
-        res.redirect('/');
-      })
-      .catch((err) => {
-        res.send(err.message);
-      });
-  } else {
-    res.redirect('/login');
-  }
-});
+  let user_id = req.cookies.user_id;
+  let email = req.body.email;
+
+  database.updateUser(email, user_id).then((result) => {
+    res.redirect('/');
+    return result;
+  })
+})
 
 app.post('/user-tasks/complete-task', (req, res) => {
-  console.log(req.body.id);
+  // console.log(req.body.id);
   database.addDateFinished(req.body.id).then((result) => {
-    console.log(result);
+    // console.log(result);
     res.send();
   });
-});
+})
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
