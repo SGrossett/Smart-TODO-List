@@ -30,7 +30,7 @@
     <main class="container">
       <section id="task-container">
         <% for (task of tasks) { %>
-          <div class="form-control">
+          <div id="task-<%= task.id %>" class="form-control">
             <input type="checkbox" class="checkbox" id="<%= task.id %>" name="<%= task.category %>" value="<%= task.description %>">
             <div id="description-text"><%= task.description %></div>
 
