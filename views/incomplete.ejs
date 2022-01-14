@@ -26,28 +26,28 @@
 <body>
   <!-- Top nav bar (fixed) -->
   <%- include('partials/_header') %>
-    <h2>Incomplete</h2>
+    <h1 class="page-title">Incomplete</h1>
 
     <!-- Page-specific (main) content here -->
-    <main class="container">
-      <section id="task-container">
-        <% for (task of tasks) { %>
-          <div id="task-<%= task.id %>" class="form-control">
-            <input type="checkbox" class="checkbox" id="<%= task.id %>" name="<%= task.category %>"
-              value="<%= task.description %>">
-            <div id="description-text">
-              <%= task.description %>
-            </div>
-
-            <div class='edit-delete'>
-              <button class="icon"><i id="<%= task.id %>" class="edit far fa-edit"></i></button>
-              <button class="icon"><i id="<%= task.id %>" class="delete far fa-trash-alt"></i></button>
-            </div>
+    <section id="task-container">
+      <% for (task of tasks) { %>
+        <div id="task-<%= task.id %>" class="form-control">
+          <input type="checkbox" class="checkbox" id="<%= task.id %>" name="<%= task.category %>"
+            value="<%= task.description %>">
+          <div id="description-text">
+            <%= task.description %>
           </div>
-          <% } %>
-            <%- include('partials/_footer') %>
-      </section>
-    </main>
+
+          <div class='edit-delete'>
+            <button class="icon edit-icon"><i id="<%= task.id %>" class="edit far fa-edit"></i></button>
+            <button class="icon delete-icon"><i id="<%= task.id %>" class="delete far fa-trash-alt"></i></button>
+          </div>
+        </div>
+        <% } %>
+          <%- include('partials/_footer') %>
+    </section>
+    <!-- <main class="container">
+    </main> -->
 </body>
 <%- include('partials/_footer') %>
 
