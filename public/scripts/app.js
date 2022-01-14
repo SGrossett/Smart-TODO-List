@@ -78,7 +78,7 @@ $(document).ready(function() {
   /* ------------Accordion-----------*/
   $('.accordion').accordion({
     collapsible: true,
-    active: false,
+    // active: false,
     heightStyle: "content"
   });
   $('.accordion').accordion('refresh');
