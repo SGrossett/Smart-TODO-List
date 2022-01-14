@@ -98,7 +98,6 @@ const addDateFinished = function(id) {
 };
 exports.addDateFinished = addDateFinished;
 
-
 // // NEW edit function - UPDATE email from users
 // const updateEmail = function(id, email) {
 //   return pool
@@ -113,7 +112,6 @@ exports.addDateFinished = addDateFinished;
 //     .catch((err) => console.log('Error:', err.message));
 // };
 // exports.updateEmail = updateEmail;
-
 
 const updateTask = function(task, category, id) {
   return pool
@@ -187,3 +185,31 @@ const deleteTask = function(id) {
     .catch((err) => console.log('Error:', err.message));
 };
 exports.deleteTask = deleteTask;
+
+const addTask = function(db, res, text, category, user_id) {
+  db
+    .query(
+      `
+    INSERT INTO tasks (
+      description,
+      category,
+      date_created, user_id
+      ) VALUES (
+        $1,
+        $2,
+        NOW(),
+        $3
+        )
+        `,
+      [ text, category, user_id ]
+    )
+    .then((data) => {
+      const tasks = data.rows;
+      console.log('ADDED TO DB');
+      res.send();
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+};
+exports.addTask = addTask;

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const categoryAssigner = require('./tools/catAssign');
 const categoryAssignerApi = require('./tools/catAssignAPI');
+const database = require('./database');
 
 module.exports = (db) => {
   router.get('/', (req, res) => {
@@ -32,35 +33,13 @@ module.exports = (db) => {
             // default category is product
             category = 'product';
           }
-
-          console.log('HERE', category)
           // Once category assigned, insert into db
-          db
-            .query(
-              `
-          INSERT INTO tasks (
-            description,
-            category,
-            date_created, user_id
-            ) VALUES (
-              $1,
-              $2,
-              NOW(),
-              $3
-              )
-              `,
-              [ text, category, user_id ]
-            )
-            .then((data) => {
-              const tasks = data.rows;
-              console.log('ADDED TO DB')
-              res.send();
-            })
-            .catch((err) => {
-              res.status(500).json({ error: err.message });
-            });
+          database.addTask(db, res, text, category, user_id);
         })
         .catch((err) => console.log(err.message));
+    } else {
+      console.log('adding from basic filter');
+      database.addTask(db, res, text, category, user_id);
     }
   });
 
