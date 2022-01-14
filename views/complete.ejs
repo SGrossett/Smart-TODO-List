@@ -1,47 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Meta Information -->
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
-    <title>ezLIST - Home Page</title>
 
-    <!-- External CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+<head>
+  <!-- Meta Information -->
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+  <title>ezLIST - Home Page</title>
 
-    <!-- App CSS -->
-    <link rel="stylesheet" href="../styles/viewTasks.css">
-    <link rel="stylesheet" href="../styles/header.css">
+  <!-- External CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
-    <!-- External JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- App CSS -->
+  <link rel="stylesheet" href="../styles/viewTasks.css">
+  <link rel="stylesheet" href="../styles/header.css">
 
-    <!-- App JS -->
-    <script type="text/javascript" src="/scripts/taskViews.js"></script>
+  <!-- External JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-  </head>
+  <!-- App JS -->
+  <script type="text/javascript" src="/scripts/taskViews.js"></script>
+  <script src="/scripts/header.js"></script>
 
-  <body>
-    <!-- Top nav bar (fixed) -->
-    <%- include('partials/_header') %>
-    <h2 class="page-title">Completed</h2>
+</head>
+
+<body>
+  <!-- Top nav bar (fixed) -->
+  <%- include('partials/_header') %>
+    <h2>Completed</h2>
 
     <!-- Page-specific (main) content here -->
     <main>
       <section id="task-container">
         <% for (task of tasks) { %>
           <div id="task-<%= task.id %>" class="form-control">
-            <input type="checkbox" class="checkbox" id="<%= task.id %>" name="<%= task.category %>" value="<%= task.description %>" checked>
-            <div id="description-text"><%= task.description %></div>
+            <input type="checkbox" class="checkbox" id="<%= task.id %>" name="<%= task.category %>"
+              value="<%= task.description %>" checked>
+            <div id="description-text">
+              <%= task.description %>
+            </div>
 
             <div class='edit-delete'>
               <button class="icon"><i id="<%= task.id %>" class="edit far fa-edit"></i></button>
               <button class="icon"><i id="<%= task.id %>" class="delete far fa-trash-alt"></i></button>
             </div>
           </div>
-              <% } %>
+          <% } %>
 
-          <%- include('partials/_footer') %>
+            <%- include('partials/_footer') %>
       </section>
     </main>
-  </body>
+</body>
+
 </html>
