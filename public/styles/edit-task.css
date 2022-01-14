@@ -1,21 +1,74 @@
-main.container {
-  border: 1px solid green;
-  background-color: whitesmoke;
-  margin: 2em 2.5em;
-  line-height: 1.6;
-  border-radius: 5px;
-  height: 50vh;
+body {
+  background-color: white;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-label[for=category] {
-  display: block;
+.page-title {
+  margin-top: 1vh;
+  margin-bottom: 5vh;
 }
-input[type=text] {
+.edit-container {
+  margin-top: 8vh;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+.form-label {
+  font-weight: bold;
+  font-size: 2.5vh;
+}
+#task-textfield {
+  width: 80vw;
+  height: fit-content;
+  padding-top: 1%;
+  padding-bottom: 3%;
+  padding-right: 3%;
+  padding-left: 1%;
+  margin-top: 1vw;
+  overflow-wrap: break-word;
+  border-radius: 1vh;
+  border: 1px solid grey;
+  font-size: 105%;
+}
+.radio {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   width: 100%;
-  padding: 0.7em 0.6em;
-  border-radius: 6px;
-  box-sizing: border-box;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+
+}
+.category-label {
+  font-weight: bold;
+  /* font-size: 110%; */
+}
+.radio-buttons {
+  margin-left: 5vw;
+  width: 50vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 #submit {
   cursor: pointer;
-  border-radius: 4px;
+  width: 80vw;
+  padding: 1.5%;
+  border-radius: 1vh;
+  border: 1px solid grey;
+}
+#submit:hover {
+  background-color: #6b38fb;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 1vh;
 }

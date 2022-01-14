@@ -23,40 +23,40 @@
 <body>
   <!-- Top nav bar (fixed) -->
   <%- include('partials/_header') %>
-    <h2>Edit Task</h2>
+    <h1 class="page-title">Edit Task</h1>
 
     <!-- Page-specific (main) content here -->
-    <main class="container">
-      <form action="/edit-task/<%= task.id %>" method="POST">
-        <div class="form-group">
-          <label for="task">Task</label>
-          <input type="text" id="task-textfield" name="task" value="<%= task.description %>"></textarea>
-          <!-- <button type="button" id="clear">Clear</button> -->
+    <form class="edit-container" action="/edit-task/<%= task.id %>" method="POST">
+      <div class="form-group edit-task-form">
+        <label for="task" class="form-label">TASK</label>
+        <input type="text" id="task-textfield" name="task" value="<%= task.description %>"></textarea>
+        <!-- <button type="button" id="clear">Clear</button> -->
+      </div>
+
+      <div class="form-group radio">
+        <label for="category" class="category-label">CATEGORY</label>
+        <div class="radio-buttons">
+          <input type="radio" name="category" value="movie">
+          <label for="movies">Movies</label>
+
+          <input type="radio" name="category" value="restaurant">
+          <label for="restaurants">Restaurants</label>
+
+          <input type="radio" name="category" value="book">
+          <label for="books">Books</label>
+
+          <input type="radio" name="category" value="product">
+          <label for="products">Products</label>
         </div>
+      </div>
 
-        <div class="form-group radio">
-          <label for="category">Category</label>
-          <div class="radio-buttons">
-            <input type="radio" name="category" value="movie">
-            <label for="movies">Movies</label>
+      <div class="form-group">
+        <button type="submit" id="submit" value="submit">Submit</button>
+      </div>
 
-            <input type="radio" name="category" value="restaurant">
-            <label for="restaurants">Restaurants</label>
-
-            <input type="radio" name="category" value="book">
-            <label for="books">Books</label>
-
-            <input type="radio" name="category" value="product">
-            <label for="products">Products</label>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <button type="submit" id="submit" value="submit">Submit</button>
-        </div>
-
-      </form>
-    </main>
+    </form>
+    <!-- <main class="container">
+    </main> -->
 </body>
 
 </html>
