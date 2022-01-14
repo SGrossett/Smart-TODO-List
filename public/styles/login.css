@@ -7,10 +7,9 @@ body {
   background-color: white;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
-  margin: 15%;
-  height: fit-content;
+  height: 100vh;
 }
 
 #profile-img {
