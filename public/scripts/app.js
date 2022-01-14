@@ -32,8 +32,10 @@ $(document).ready(function() {
     return `
     <div>
       <span class="listItem">
-        <i class="far fa-square icon" id="completeTask${item.id}"></i>
-        ${item.description}
+        <span class="completeIcon-text">
+          <i class="far fa-square icon" id="completeTask${item.id}"></i>
+          ${item.description}
+        </span>
         <a href="http://localhost:8080/edit-task/${item.id}">
         <i class="far fa-edit icon" id="editTask${item.id}"></i>
         </a>
