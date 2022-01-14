@@ -26,6 +26,7 @@ $(document).ready(function() {
 
   $(`#burger`).on('click', function() {
     $(`.container`).toggle(600);
+    $('#task-container').toggle(600);
   });
 
   $(`i.edit`).on('click', function() {
