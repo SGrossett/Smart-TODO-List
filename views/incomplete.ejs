@@ -1,29 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Meta Information -->
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
-    <title>Smart-TODO-List - Home Page</title>
 
-    <!-- External CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+<head>
+  <!-- Meta Information -->
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+  <title>ezLIST - Home Page</title>
 
-    <!-- App CSS -->
-    <link rel="stylesheet" href="../styles/viewTasks.css">
-    <link rel="stylesheet" href="../styles/header.css">
+  <!-- External CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+  <!-- App CSS -->
+  <link rel="stylesheet" href="../styles/viewTasks.css">
+  <link rel="stylesheet" href="../styles/header.css">
 
 
-    <!-- External JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- External JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <!-- App JS -->
-    <script type="text/javascript" src="../scripts/taskViews.js"></script>
+  <!-- App JS -->
+  <script type="text/javascript" src="../scripts/taskViews.js"></script>
 
-  </head>
+</head>
 
-  <body>
-    <!-- Top nav bar (fixed) -->
-    <%- include('partials/_header') %>
+<body>
+  <!-- Top nav bar (fixed) -->
+  <%- include('partials/_header') %>
     <h2>Incomplete</h2>
 
     <!-- Page-specific (main) content here -->
@@ -31,19 +32,22 @@
       <section id="task-container">
         <% for (task of tasks) { %>
           <div id="task-<%= task.id %>" class="form-control">
-            <input type="checkbox" class="checkbox" id="<%= task.id %>" name="<%= task.category %>" value="<%= task.description %>">
-            <div id="description-text"><%= task.description %></div>
+            <input type="checkbox" class="checkbox" id="<%= task.id %>" name="<%= task.category %>"
+              value="<%= task.description %>">
+            <div id="description-text">
+              <%= task.description %>
+            </div>
 
             <div class='edit-delete'>
               <button class="icon"><i id="<%= task.id %>" class="edit far fa-edit"></i></button>
               <button class="icon"><i id="<%= task.id %>" class="delete far fa-trash-alt"></i></button>
             </div>
           </div>
-              <% } %>
-          <%- include('partials/_footer') %>
+          <% } %>
+            <%- include('partials/_footer') %>
       </section>
     </main>
-  </body>
-  <%- include('partials/_footer') %>
-</html>
+</body>
+<%- include('partials/_footer') %>
 
+</html>
