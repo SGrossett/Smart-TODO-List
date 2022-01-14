@@ -25,23 +25,26 @@
   <h2 class="temp-title">Profile Editor</h2>
 
   <section class="main-body">
-    My email: <%= email %>
-      <!-- <div class="user-stats">
-      </div> -->
+    <div class="current-user">
+      <span class="my-email-label">
+        My email:
+      </span>
+      <span class="my-email">
+        <%= email %>
+      </span>
+    </div>
 
-      <form action="/edit-user" method="POST" id="editEmailForm">
-        <i>
-          New email:
-        </i>
+    <form action="/edit-user" method="POST" id="editEmailForm">
+      <h2 class="email-form-header">
+        NEW EMAIL
+      </h2>
 
+      <div class="form-entry">
         <input type="text" id="editEmailFormText" value="<%= email %>" name="email"></input>
         <button type="submit" id="editEmailSubmit">+</button>
-      </form>
-
+      </div>
+    </form>
   </section>
-
-
-
 </body>
 <%- include('partials/_footer') %>
 
