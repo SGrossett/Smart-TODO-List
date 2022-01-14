@@ -54,7 +54,9 @@ app.use('/api/tasks', tasksRoutes(db));
 app.get('/', (req, res) => {
   const user_id = req.cookies.user_id;
   if (user_id) {
-    res.render('index');
+    database.getEmailFromId(user_id).then(email => {
+      res.render('index', {email});
+    })
   } else {
     res.redirect('/login');
   }
