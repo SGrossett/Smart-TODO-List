@@ -20,6 +20,7 @@ $(document).ready(function() {
       data: $(this).serialize()
     })
       .done((listItems) => {
+        $('#task-text').val('');
         fetchTasks();
       })
       .fail((err) => {
@@ -79,7 +80,7 @@ $(document).ready(function() {
   $('.accordion').accordion({
     collapsible: true,
     // active: false,
-    heightStyle: "content"
+    heightStyle: 'content'
   });
   $('.accordion').accordion('refresh');
 
@@ -102,11 +103,10 @@ $(document).ready(function() {
       .fail((err) => {
         console.log('ERROR', err);
       });
-  }
+  };
 
   /* -------Edit Profile----------*/
   const editEmail = function(id) {
-
     $(`#editEmailSubmit`).click(function(event) {
       event.preventDefault();
       console.log('submitting edit');
@@ -124,8 +124,7 @@ $(document).ready(function() {
       .fail((err) => {
         console.log('ERROR', err);
       });
-  }
-
+  };
 });
 
 // REMOVE - this is for the old header
