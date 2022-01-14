@@ -1,34 +1,39 @@
 body {
   background-color: white;
   font-family: sans-serif;
-}
-main {
-  margin: 2em 1em;
-  font-size: 15px;
-}
-
-.form-control {
-  background-color: whitesmoke;
-  border: 1px solid #96b6e9;
   display: flex;
-  gap: 0.5em;
-  border-radius: 0.4em;
-  margin: 0.5em auto;
-  padding: 0.7em 0.6em;
+  flex-direction: column;
+  align-items: center;
+}
+.page-title {
+  margin-top: 1vh;
+  margin-bottom: 5vh;
+}
+#task-container {
+  margin-top: 8vh;
+  width: 80%;
+}
+.form-control{
+  display: flex;
+  align-items: center;
+  margin-bottom: 2vh;
+  padding: 1.2vh;
+  border: 1px solid grey;
+  border-radius: 1vh;
+
 }
 #task-container input[type="checkbox"] {
   -webkit-appearance: none;
   appearance: none;
-  background-color: whitesmoke;
+  background-color: transparent;
   margin: 0;
-  /* font: inherit; */
   width: 1em;
   height: 1em;
-  border: 1.9px solid #2457a8;
+  border: 1.9px solid grey;
   border-radius: 50%;
   transform: translateY(0.1em);
   display: grid;
-  place-content: center;
+  /* place-content: center; */
 }
 
 #task-container input[type="checkbox"]::before {
@@ -38,28 +43,29 @@ main {
   transform: scale(0);
   transition: 120ms transform ease-in-out;
   box-shadow: inset 1em 1em var(--form-control-color);
-  background-color: #2457a8;
+  background-color: grey;
   transform-origin: bottom left;
   clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
 }
 #task-container input[type="checkbox"]:checked::before {
   transform: scale(1);
 }
-.edit-delete {
+#description-text {
+  margin-left: 1vh;
+}
+.edit-delete{
+  border: none;
   display: flex;
   margin-left: auto;
 }
+.edit-icon {
+  margin-right: 1vh;
+  color: #6b38fb;
+}
+.delete-icon {
+  color: #ff3b34;
+}
 .icon {
+  background-color: transparent;
   border: none;
 }
-i.edit {
-  margin-right: 1em;
-  color: #228b22;
-}
-i.delete {
-  color: #800080;
-}
-button.icon {
-  background-color: #f5f5f5;
-}
-/* edit/delete css end */
