@@ -1,49 +1,12 @@
 body {
-  font-family: 'Arial', 'Helvetica', sans-serif;
-  background-color: #fcfcfc;
+  font-family: 'Libre Franklin', sans-serif;  background-color: white;
 }
 
-// navigation
-// positions the header bar
-.fixed-header {
+.page-title {
+  margin-top: 1vh;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  justify-content: center;
 }
-// menu icon
-.navbar a.menu-icon {
-  background: whitesmoke;
-}
-// app name
-.active {
-  padding-left: 3vh;
-}
-// expandable navigation menu
-.navbar {
-  overflow: hidden;
-  background-color: white;
-  // border: 1px solid lightgrey;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
-// sets default to hide navigation links
-.navbar #menu-links {
-  display: none;
-}
-// navigation links
-.navbar a {
-  color: black;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-  display: block;
-}
-// change colour on hover
-.navbar a:hover {
-  background-color: whitesmoke;
-  color: dimgray;
-}
-
 // main
 .todo-section {
   display: flex;
@@ -61,7 +24,7 @@ body {
   margin-bottom: 8%;
 }
 #task-text {
-  width: 85%;
+  width: 90%;
   padding: 8px;
   border-radius: 5px;
   border: 1px solid lightgrey;
@@ -90,10 +53,9 @@ body {
 // individual list items ✅
 .listItem {
   // position
-  // margin: 1.5%;
   padding: 5px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
 
   // styling
@@ -121,7 +83,6 @@ body {
   // overflow-y: scroll;
   padding-left: 3%;
 }
-
 // scrollbar
 // default
 ::-webkit-scrollbar {
