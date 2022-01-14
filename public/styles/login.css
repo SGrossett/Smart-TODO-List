@@ -1,40 +1,39 @@
-.card-container {
-  background: #f2f2f2;
-  padding: 40px;
-  height: 100vh;
+body {
+  background-color: white;
 }
+.card-container {
+  /* background: #f2f2f2; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 15%;
+  height: fit-content;
+}
+
 #profile-img {
-  display: block;
-  margin: 30px auto 40px;
-  border-radius: 15%;
+  border-radius: 10%;
   height: 150px;
   width: 150px;
 }
-.login .form-control {
-  margin: 12px auto;
+.login {
+  margin: 5%;
+  width: 80%;
 }
-h2 {
-  font-size: 3rem;
-  margin-top: 0.25em;
+.form-control {
+  margin-top: 5;
+  margin-bottom: 2.5%;
+}
+.header-text {
+  font-size: 4rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8vh;
+  background-color: whitesmoke;
 }
 .btn {
   width: 100%;
   cursor: pointer;
   margin: 0px auto 35px;
-}
-h2:before,
-h2:after {
-  content: "";
-  height: 3px;
-  width: 10%;
-  background: #d4d4d4;
-  position: absolute;
-  top: 13%;
-  z-index: 2;
-}
-h2:before {
-  left: 0;
-}
-h2:after {
-  right: 0;
 }
